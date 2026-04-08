@@ -3,26 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AquaPress Dry Cleaners & Laundry</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<title>Glaze Dry Cleaners & Laundry – Lucknow</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <style>
-  
   :root {
-    --navy: #0b1d35;
-    --deep: #071426;
-    --blue: #1a6db5;
-    --sky: #3b9de8;
-    --light-blue: #d6ecff;
-    --gold: #c9a84c;
-    --white: #ffffff;
-    --off-white: #f4f9ff;
-    --text-dark: #0d1f3c;
-    --text-mid: #3a5068;
-    --text-light: #7a9ab5;
+    --navy:       #07192e;
+    --deep:       #050f1c;
+    --blue:       #1a6db5;
+    --sky:        #3b9de8;
+    --crystal:    #7ec8f8;
+    --light-blue: #d0ebff;
+    --gold:       #c9a84c;
+    --gold-light: #f0d080;
+    --white:      #ffffff;
+    --off-white:  #f4f9ff;
+    --card-bg:    rgba(255,255,255,0.04);
+    --border:     rgba(255,255,255,0.08);
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior: smooth; }
 
   body {
@@ -30,1890 +29,1650 @@
     background: var(--deep);
     color: var(--white);
     overflow-x: hidden;
+    min-height: 100vh;
   }
 
-  /* ===== BUBBLE BACKGROUND ===== */
-  .bubble-container {
+  /* ════════════════════════════════
+     BUBBLES — fixed full viewport
+  ════════════════════════════════ */
+  #bubbles {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    inset: 0;
     pointer-events: none;
     z-index: 0;
     overflow: hidden;
   }
 
-  .bubble {
+  .b {
     position: absolute;
-    bottom: -120px;
+    bottom: -150px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), rgba(58,157,232,0.08));
-    border: 1px solid rgba(255,255,255,0.15);
-    backdrop-filter: blur(1px);
-    animation: floatUp linear infinite;
+    background: radial-gradient(circle at 32% 28%,
+      rgba(255,255,255,0.28) 0%,
+      rgba(100,190,255,0.10) 40%,
+      rgba(59,157,232,0.04) 100%);
+    border: 1px solid rgba(255,255,255,0.18);
+    animation: rise linear infinite;
   }
 
-  .bubble::after {
-    content: '';
-    position: absolute;
-    top: 18%;
-    left: 20%;
-    width: 28%;
-    height: 18%;
-    background: rgba(255,255,255,0.35);
-    border-radius: 50%;
-    transform: rotate(-30deg);
+  .b::before {
+    content:'';
+    position:absolute;
+    top:15%; left:18%;
+    width:30%; height:18%;
+    background: rgba(255,255,255,0.38);
+    border-radius:50%;
+    transform: rotate(-25deg);
   }
 
-  @keyframes floatUp {
-    0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
-    10%  { opacity: 1; }
-    90%  { opacity: 0.4; }
-    100% { transform: translateY(-110vh) translateX(30px) scale(0.85); opacity: 0; }
+  .b::after {
+    content:'';
+    position:absolute;
+    top:55%; left:60%;
+    width:12%; height:8%;
+    background: rgba(255,255,255,0.18);
+    border-radius:50%;
   }
 
-  /* Generate many bubbles */
-  .bubble:nth-child(1)  { left: 5%;   width: 40px;  height: 40px;  animation-duration: 14s; animation-delay: 0s;   }
-  .bubble:nth-child(2)  { left: 15%;  width: 70px;  height: 70px;  animation-duration: 18s; animation-delay: 2s;   }
-  .bubble:nth-child(3)  { left: 25%;  width: 30px;  height: 30px;  animation-duration: 12s; animation-delay: 4s;   }
-  .bubble:nth-child(4)  { left: 35%;  width: 55px;  height: 55px;  animation-duration: 16s; animation-delay: 1s;   }
-  .bubble:nth-child(5)  { left: 45%;  width: 80px;  height: 80px;  animation-duration: 20s; animation-delay: 6s;   }
-  .bubble:nth-child(6)  { left: 55%;  width: 45px;  height: 45px;  animation-duration: 13s; animation-delay: 3s;   }
-  .bubble:nth-child(7)  { left: 65%;  width: 60px;  height: 60px;  animation-duration: 17s; animation-delay: 5s;   }
-  .bubble:nth-child(8)  { left: 75%;  width: 35px;  height: 35px;  animation-duration: 11s; animation-delay: 7s;   }
-  .bubble:nth-child(9)  { left: 82%;  width: 90px;  height: 90px;  animation-duration: 22s; animation-delay: 0s;   }
-  .bubble:nth-child(10) { left: 90%;  width: 50px;  height: 50px;  animation-duration: 15s; animation-delay: 4s;   }
-  .bubble:nth-child(11) { left: 10%;  width: 25px;  height: 25px;  animation-duration: 10s; animation-delay: 8s;   }
-  .bubble:nth-child(12) { left: 48%;  width: 65px;  height: 65px;  animation-duration: 19s; animation-delay: 9s;   }
-  .bubble:nth-child(13) { left: 30%;  width: 42px;  height: 42px;  animation-duration: 14s; animation-delay: 11s;  }
-  .bubble:nth-child(14) { left: 70%;  width: 78px;  height: 78px;  animation-duration: 21s; animation-delay: 2s;   }
-  .bubble:nth-child(15) { left: 88%;  width: 32px;  height: 32px;  animation-duration: 12s; animation-delay: 6s;   }
-  .bubble:nth-child(16) { left: 3%;   width: 58px;  height: 58px;  animation-duration: 16s; animation-delay: 13s;  }
-  .bubble:nth-child(17) { left: 58%;  width: 22px;  height: 22px;  animation-duration: 9s;  animation-delay: 1s;   }
-  .bubble:nth-child(18) { left: 42%;  width: 85px;  height: 85px;  animation-duration: 23s; animation-delay: 7s;   }
-  .bubble:nth-child(19) { left: 20%;  width: 48px;  height: 48px;  animation-duration: 15s; animation-delay: 10s;  }
-  .bubble:nth-child(20) { left: 77%;  width: 36px;  height: 36px;  animation-duration: 13s; animation-delay: 15s;  }
+  @keyframes rise {
+    0%   { transform: translateY(0)   translateX(0)    scale(1);    opacity:0; }
+    8%   { opacity:.9; }
+    88%  { opacity:.35; }
+    100% { transform: translateY(-115vh) translateX(25px) scale(0.8); opacity:0; }
+  }
 
-  /* ===== NAVBAR ===== */
+  /* 30 bubbles */
+  .b:nth-child(1)  {left:2%;  width:38px; height:38px; animation-duration:14s; animation-delay:0s;   }
+  .b:nth-child(2)  {left:7%;  width:62px; height:62px; animation-duration:19s; animation-delay:3s;   }
+  .b:nth-child(3)  {left:13%; width:28px; height:28px; animation-duration:11s; animation-delay:6s;   }
+  .b:nth-child(4)  {left:18%; width:50px; height:50px; animation-duration:16s; animation-delay:1s;   }
+  .b:nth-child(5)  {left:24%; width:80px; height:80px; animation-duration:22s; animation-delay:8s;   }
+  .b:nth-child(6)  {left:30%; width:35px; height:35px; animation-duration:13s; animation-delay:4s;   }
+  .b:nth-child(7)  {left:37%; width:55px; height:55px; animation-duration:17s; animation-delay:2s;   }
+  .b:nth-child(8)  {left:43%; width:90px; height:90px; animation-duration:24s; animation-delay:10s;  }
+  .b:nth-child(9)  {left:50%; width:42px; height:42px; animation-duration:15s; animation-delay:5s;   }
+  .b:nth-child(10) {left:56%; width:66px; height:66px; animation-duration:20s; animation-delay:7s;   }
+  .b:nth-child(11) {left:62%; width:30px; height:30px; animation-duration:12s; animation-delay:9s;   }
+  .b:nth-child(12) {left:68%; width:75px; height:75px; animation-duration:21s; animation-delay:0s;   }
+  .b:nth-child(13) {left:74%; width:45px; height:45px; animation-duration:16s; animation-delay:12s;  }
+  .b:nth-child(14) {left:80%; width:58px; height:58px; animation-duration:18s; animation-delay:3s;   }
+  .b:nth-child(15) {left:86%; width:25px; height:25px; animation-duration:10s; animation-delay:6s;   }
+  .b:nth-child(16) {left:92%; width:85px; height:85px; animation-duration:23s; animation-delay:1s;   }
+  .b:nth-child(17) {left:97%; width:40px; height:40px; animation-duration:14s; animation-delay:14s;  }
+  .b:nth-child(18) {left:4%;  width:70px; height:70px; animation-duration:20s; animation-delay:16s;  }
+  .b:nth-child(19) {left:21%; width:32px; height:32px; animation-duration:12s; animation-delay:11s;  }
+  .b:nth-child(20) {left:34%; width:48px; height:48px; animation-duration:17s; animation-delay:13s;  }
+  .b:nth-child(21) {left:47%; width:22px; height:22px; animation-duration:9s;  animation-delay:2s;   }
+  .b:nth-child(22) {left:59%; width:95px; height:95px; animation-duration:26s; animation-delay:4s;   }
+  .b:nth-child(23) {left:71%; width:36px; height:36px; animation-duration:13s; animation-delay:17s;  }
+  .b:nth-child(24) {left:83%; width:52px; height:52px; animation-duration:18s; animation-delay:8s;   }
+  .b:nth-child(25) {left:10%; width:60px; height:60px; animation-duration:19s; animation-delay:20s;  }
+  .b:nth-child(26) {left:27%; width:44px; height:44px; animation-duration:15s; animation-delay:18s;  }
+  .b:nth-child(27) {left:40%; width:76px; height:76px; animation-duration:22s; animation-delay:15s;  }
+  .b:nth-child(28) {left:65%; width:34px; height:34px; animation-duration:11s; animation-delay:22s;  }
+  .b:nth-child(29) {left:77%; width:68px; height:68px; animation-duration:20s; animation-delay:19s;  }
+  .b:nth-child(30) {left:90%; width:50px; height:50px; animation-duration:16s; animation-delay:25s;  }
+
+  /* ════════════════════════════════
+     NAVBAR
+  ════════════════════════════════ */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 1000;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 4rem;
-    height: 72px;
-    background: rgba(7, 20, 38, 0.85);
-    backdrop-filter: blur(20px);
+    padding: 0 3rem;
+    background: rgba(5,15,28,0.88);
+    backdrop-filter: blur(22px);
     border-bottom: 1px solid rgba(255,255,255,0.07);
   }
 
   .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
+    display: flex; align-items: center; gap: 11px;
+    text-decoration: none; flex-shrink: 0;
   }
 
-  .nav-logo-icon {
-    width: 42px; height: 42px;
-    background: linear-gradient(135deg, var(--sky), var(--blue));
-    border-radius: 50%;
+  .nav-logo-gem {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--crystal), var(--sky), var(--blue));
+    border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
     font-size: 20px;
-    box-shadow: 0 0 16px rgba(59,157,232,0.4);
+    box-shadow: 0 0 18px rgba(59,157,232,0.45);
+    flex-shrink: 0;
   }
 
   .nav-logo-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     font-weight: 700;
     color: var(--white);
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
   }
 
-  .nav-logo-text span { color: var(--sky); }
+  .nav-logo-text em {
+    font-style: italic;
+    color: var(--crystal);
+  }
 
   .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 2.5rem;
+    display: flex; align-items: center;
+    gap: 0.1rem;
     list-style: none;
+    flex-wrap: nowrap;
   }
 
   .nav-links a {
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    color: rgba(255,255,255,0.75);
-    letter-spacing: 0.5px;
-    transition: color 0.3s;
-    position: relative;
+    color: rgba(255,255,255,0.7);
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: color 0.25s, background 0.25s;
+    white-space: nowrap;
   }
 
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0;
-    width: 0; height: 2px;
-    background: var(--sky);
-    transition: width 0.3s;
-    border-radius: 2px;
+  .nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+
+  .nav-divider { width:1px; height:22px; background: rgba(255,255,255,0.13); margin:0 6px; }
+
+  /* Franchise nav pill */
+  .nav-franchise {
+    background: linear-gradient(135deg, rgba(201,168,76,0.18), rgba(201,168,76,0.06));
+    border: 1px solid rgba(201,168,76,0.35) !important;
+    color: var(--gold) !important;
+    border-radius: 20px !important;
+    font-weight: 600 !important;
+    padding: 5px 14px !important;
   }
 
-  .nav-links a:hover { color: var(--white); }
-  .nav-links a:hover::after { width: 100%; }
+  .nav-franchise:hover { background: rgba(201,168,76,0.25) !important; color: var(--gold-light) !important; }
 
-  .nav-divider {
-    width: 1px; height: 24px;
-    background: rgba(255,255,255,0.15);
+  /* WhatsApp button */
+  .nav-wa {
+    display: flex; align-items: center; gap: 7px;
+    background: #25D366;
+    color: white !important;
+    border-radius: 20px !important;
+    padding: 5px 14px !important;
+    font-weight: 600 !important;
+    font-size: 0.82rem !important;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.25s, transform 0.2s !important;
+    box-shadow: 0 4px 14px rgba(37,211,102,0.3);
   }
 
+  .nav-wa:hover { background: #20bc5a !important; transform: translateY(-1px) !important; }
+
+  .wa-icon { font-size: 1rem; line-height: 1; }
+
+  /* Timing pill */
   .nav-timing {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.82rem;
-    color: var(--gold);
-    font-weight: 500;
+    display: flex; align-items: center; gap: 7px;
+    font-size: 0.78rem; color: var(--gold);
+    font-weight: 500; white-space: nowrap;
+    padding: 0 4px;
   }
 
-  .timing-dot {
+  .open-dot {
     width: 7px; height: 7px;
-    background: #4caf50;
-    border-radius: 50%;
+    background: #4caf50; border-radius: 50%;
     animation: pulse 2s infinite;
   }
 
   @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(76,175,80,0.4); }
-    50% { box-shadow: 0 0 0 5px rgba(76,175,80,0); }
+    0%,100%{box-shadow:0 0 0 0 rgba(76,175,80,.5)}
+    50%{box-shadow:0 0 0 5px rgba(76,175,80,0)}
   }
 
-  /* ===== SECTIONS BASE ===== */
-  section {
-    position: relative;
-    z-index: 1;
-  }
+  /* ════════════════════════════════
+     GLOBAL HELPERS
+  ════════════════════════════════ */
+  section { position:relative; z-index:1; }
 
-  .section-inner {
+  .inner {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
   }
 
-  .section-label {
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--sky);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  .label {
+    font-size: 0.74rem; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--crystal);
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 0.9rem;
   }
 
-  .section-label::before {
-    content: '';
-    width: 30px; height: 2px;
-    background: var(--sky);
-    border-radius: 2px;
-    flex-shrink: 0;
+  .label::before {
+    content:''; width:28px; height:2px;
+    background: var(--crystal); border-radius:2px; flex-shrink:0;
   }
 
-  .section-title {
+  .sec-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700;
-    line-height: 1.15;
+    font-size: clamp(2.4rem,5vw,3.8rem);
+    font-weight: 700; line-height: 1.15;
     color: var(--white);
   }
 
-  .section-title em {
-    font-style: italic;
-    color: var(--sky);
+  .sec-title em { font-style:italic; color:var(--crystal); }
+
+  .btn-blue {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--sky), var(--blue));
+    color: white; border: none; border-radius: 50px;
+    padding: 13px 30px; font-size: 0.92rem; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    box-shadow: 0 6px 26px rgba(59,157,232,.35);
+    transition: transform .25s, box-shadow .25s;
   }
 
-  /* ===== HERO SECTION ===== */
+  .btn-blue:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(59,157,232,.5); }
+
+  .btn-gold {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--gold), #a07830);
+    color: white; border: none; border-radius: 50px;
+    padding: 13px 30px; font-size: 0.92rem; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    box-shadow: 0 6px 26px rgba(201,168,76,.35);
+    transition: transform .25s, box-shadow .25s;
+  }
+
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(201,168,76,.5); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1.5px solid rgba(255,255,255,.22);
+    color: white; border-radius: 50px;
+    padding: 12px 28px; font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    transition: border-color .25s, background .25s;
+  }
+
+  .btn-ghost:hover { border-color: var(--sky); background: rgba(59,157,232,.08); }
+
+  /* ════════════════════════════════
+     HERO
+  ════════════════════════════════ */
   #home {
     min-height: 100vh;
-    background: linear-gradient(160deg, #071426 0%, #0b2040 40%, #0a1830 100%);
-    display: flex;
-    align-items: center;
-    padding-top: 72px;
-    overflow: hidden;
+    background: linear-gradient(160deg, #050f1c 0%, #0b2040 45%, #071428 100%);
+    display: flex; align-items: center;
+    padding-top: 70px;
   }
 
-  .hero-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 5rem 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+    padding: 5rem 0;
   }
 
   .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(59,157,232,0.12);
-    border: 1px solid rgba(59,157,232,0.3);
-    color: var(--sky);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 6px 16px;
-    border-radius: 100px;
-    margin-bottom: 1.5rem;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(59,157,232,.12);
+    border: 1px solid rgba(59,157,232,.3);
+    color: var(--crystal); font-size: 0.76rem;
+    font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; padding: 5px 14px;
+    border-radius: 100px; margin-bottom: 1.4rem;
   }
 
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    font-weight: 700;
-    line-height: 1.05;
-    color: var(--white);
-    margin-bottom: 1.5rem;
+    font-size: clamp(3rem,6vw,5.5rem);
+    font-weight: 700; line-height: 1.06;
+    color: var(--white); margin-bottom: 1.4rem;
   }
 
-  .hero-title .accent { color: var(--sky); }
-  .hero-title .gold { color: var(--gold); }
-
-  .hero-subtitle {
-    font-size: 1.15rem;
-    color: rgba(255,255,255,0.65);
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
-    font-weight: 300;
-    max-width: 480px;
+  .hero-title .glaze {
+    font-style: italic;
+    background: linear-gradient(90deg, var(--crystal), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .hero-cta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+  .hero-sub {
+    font-size: 1.1rem; color: rgba(255,255,255,.6);
+    line-height: 1.75; font-weight: 300;
+    max-width: 460px; margin-bottom: 2.4rem;
   }
 
-  .btn-primary {
-    background: linear-gradient(135deg, var(--sky), var(--blue));
-    color: var(--white);
-    border: none;
-    padding: 14px 34px;
-    border-radius: 50px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 6px 30px rgba(59,157,232,0.35);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 40px rgba(59,157,232,0.5);
-  }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--white);
-    border: 1.5px solid rgba(255,255,255,0.25);
-    padding: 14px 34px;
-    border-radius: 50px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    transition: border-color 0.3s, background 0.3s;
-  }
-
-  .btn-outline:hover {
-    border-color: var(--sky);
-    background: rgba(59,157,232,0.08);
-  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 
   .hero-stats {
-    display: flex;
-    gap: 2.5rem;
-    margin-top: 3rem;
-    padding-top: 2.5rem;
-    border-top: 1px solid rgba(255,255,255,0.08);
-  }
-
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--sky);
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.5);
-    margin-top: 4px;
-    letter-spacing: 0.5px;
-  }
-
-  /* Hero visual */
-  .hero-visual {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .hero-circle-bg {
-    width: 420px; height: 420px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(59,157,232,0.12) 0%, transparent 70%);
-    position: absolute;
-  }
-
-  .hero-card-main {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 24px;
-    padding: 2.5rem;
-    backdrop-filter: blur(20px);
-    width: 320px;
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-card-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero-card-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-  }
-
-  .hero-card-desc {
-    font-size: 0.88rem;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-tags {
-    display: flex;
+    display: flex; gap: 2.5rem;
+    margin-top: 3rem; padding-top: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,.08);
     flex-wrap: wrap;
-    gap: 8px;
   }
 
+  .stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 700; color: var(--crystal); line-height:1;
+  }
+
+  .stat-l { font-size:.78rem; color:rgba(255,255,255,.45); margin-top:4px; }
+
+  /* hero visual */
+  .hero-visual { position:relative; display:flex; align-items:center; justify-content:center; }
+
+  .hero-glow {
+    width:380px; height:380px; border-radius:50%;
+    background: radial-gradient(circle, rgba(59,157,232,.14), transparent 70%);
+    position:absolute;
+  }
+
+  .hero-card {
+    background: rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
+    border-radius:24px; padding:2.25rem; backdrop-filter:blur(18px);
+    width:300px; position:relative; z-index:2;
+  }
+
+  .hero-card-icon { font-size:2.8rem; margin-bottom:1rem; display:block; }
+  .hero-card-h { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:700; margin-bottom:.5rem; }
+  .hero-card-p { font-size:.85rem; color:rgba(255,255,255,.5); line-height:1.6; margin-bottom:1.25rem; }
+
+  .hero-tags { display:flex; flex-wrap:wrap; gap:7px; }
   .hero-tag {
-    font-size: 0.75rem;
-    padding: 4px 12px;
-    border-radius: 20px;
-    background: rgba(59,157,232,0.15);
-    border: 1px solid rgba(59,157,232,0.25);
-    color: var(--sky);
-    font-weight: 500;
+    font-size:.72rem; padding:3px 11px; border-radius:20px;
+    background:rgba(59,157,232,.13); border:1px solid rgba(59,157,232,.22);
+    color:var(--crystal); font-weight:500;
   }
 
-  .hero-float-card {
-    position: absolute;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 16px;
-    padding: 1rem 1.25rem;
-    backdrop-filter: blur(16px);
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.8);
-    z-index: 3;
+  .fc-top {
+    position:absolute; top:-28px; right:-28px;
+    background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12);
+    border-radius:14px; padding:.9rem 1.1rem;
+    backdrop-filter:blur(14px); z-index:3; text-align:center;
   }
 
-  .hero-float-card.top-right {
-    top: -30px; right: -30px;
-    text-align: center;
+  .fc-bot {
+    position:absolute; bottom:-18px; left:-28px;
+    background:rgba(37,211,102,.12); border:1px solid rgba(37,211,102,.3);
+    border-radius:14px; padding:.9rem 1.1rem;
+    backdrop-filter:blur(14px); z-index:3;
+    display:flex; align-items:center; gap:9px;
   }
 
-  .hero-float-card.bottom-left {
-    bottom: -20px; left: -30px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .float-icon { font-size: 1.5rem; }
-
-  /* ===== ABOUT SECTION ===== */
+  /* ════════════════════════════════
+     ABOUT
+  ════════════════════════════════ */
   #about {
     padding: 7rem 0;
-    background: linear-gradient(180deg, #071426 0%, #0c2040 100%);
+    background: linear-gradient(180deg, #071428 0%, #0c2040 100%);
   }
 
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+
+  .about-img-wrap {
+    position:relative; height:460px;
   }
 
-  .about-image-stack {
-    position: relative;
-    height: 480px;
+  .a-big {
+    position:absolute; top:0; left:0; width:68%; height:73%;
+    background:linear-gradient(145deg,rgba(59,157,232,.14),rgba(26,109,181,.08));
+    border:1px solid rgba(59,157,232,.2); border-radius:24px;
+    display:flex; align-items:center; justify-content:center; font-size:6rem;
   }
 
-  .about-card-big {
-    position: absolute;
-    top: 0; left: 0;
-    width: 70%;
-    height: 75%;
-    background: linear-gradient(135deg, rgba(59,157,232,0.15), rgba(26,109,181,0.1));
-    border: 1px solid rgba(59,157,232,0.2);
-    border-radius: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 6rem;
+  .a-small {
+    position:absolute; bottom:0; right:0; width:54%; height:48%;
+    background:linear-gradient(145deg,rgba(201,168,76,.12),rgba(201,168,76,.04));
+    border:1px solid rgba(201,168,76,.2); border-radius:24px;
+    padding:1.5rem; display:flex; flex-direction:column; justify-content:flex-end;
   }
 
-  .about-card-small {
-    position: absolute;
-    bottom: 0; right: 0;
-    width: 55%;
-    height: 50%;
-    background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.05));
-    border: 1px solid rgba(201,168,76,0.2);
-    border-radius: 24px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  .a-badge {
+    position:absolute; top:50%; left:54%; transform:translate(-50%,-50%);
+    background:linear-gradient(135deg,var(--sky),var(--blue));
+    border-radius:50%; width:96px; height:96px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    box-shadow:0 8px 30px rgba(59,157,232,.4); z-index:5; text-align:center;
   }
 
-  .about-badge-float {
-    position: absolute;
-    top: 50%; left: 55%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(135deg, var(--sky), var(--blue));
-    border-radius: 50%;
-    width: 100px; height: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 32px rgba(59,157,232,0.45);
-    z-index: 5;
-    text-align: center;
+  .a-badge-n { font-family:'Cormorant Garamond',serif; font-size:1.9rem; font-weight:700; line-height:1; }
+  .a-badge-l { font-size:.58rem; color:rgba(255,255,255,.85); letter-spacing:.5px; margin-top:3px; }
+
+  .about-feats { display:grid; grid-template-columns:1fr 1fr; gap:.9rem; margin-top:1.8rem; }
+
+  .afeat {
+    display:flex; align-items:flex-start; gap:9px; padding:.9rem;
+    background:var(--card-bg); border:1px solid var(--border); border-radius:12px;
   }
 
-  .about-badge-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: white;
-    line-height: 1;
+  .afeat-icon { font-size:1.25rem; flex-shrink:0; margin-top:2px; }
+
+  .afeat-body { font-size:.85rem; color:rgba(255,255,255,.6); line-height:1.5; }
+  .afeat-body strong { display:block; color:var(--white); font-weight:600; font-size:.88rem; margin-bottom:2px; }
+
+  .timing-bar {
+    margin-top: 5rem;
+    background: linear-gradient(135deg,rgba(59,157,232,.1),rgba(26,109,181,.06));
+    border:1px solid rgba(59,157,232,.2); border-radius:16px;
+    padding:1.4rem 2rem;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;
   }
 
-  .about-badge-text {
-    font-size: 0.62rem;
-    color: rgba(255,255,255,0.85);
-    letter-spacing: 0.5px;
-  }
+  .timing-head { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:700; display:flex; align-items:center; gap:8px; }
 
-  .about-content p {
-    font-size: 1.05rem;
-    color: rgba(255,255,255,0.65);
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-    font-weight: 300;
-  }
+  .timing-slots { display:flex; gap:2rem; flex-wrap:wrap; }
+  .t-slot { text-align:center; }
+  .t-day { font-size:.7rem; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.38); margin-bottom:3px; }
+  .t-time { font-size:.88rem; font-weight:600; }
+  .t-time.closed { color:rgba(255,80,80,.8); }
 
-  .about-features {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
-  .about-feat {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 1rem;
-    background: rgba(255,255,255,0.04);
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .about-feat-icon {
-    font-size: 1.3rem;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .about-feat-text {
-    font-size: 0.88rem;
-    color: rgba(255,255,255,0.65);
-    line-height: 1.5;
-  }
-
-  .about-feat-text strong {
-    display: block;
-    color: var(--white);
-    font-weight: 600;
-    margin-bottom: 2px;
-    font-size: 0.92rem;
-  }
-
-  /* ===== SERVICES ===== */
+  /* ════════════════════════════════
+     SERVICES
+  ════════════════════════════════ */
   #services {
-    padding: 7rem 0;
+    padding:7rem 0;
     background: var(--deep);
   }
 
-  .services-header {
-    text-align: center;
-    margin-bottom: 4rem;
+  .sec-hdr { text-align:center; margin-bottom:3.5rem; }
+  .sec-hdr .label { justify-content:center; }
+
+  .srv-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+
+  .srv-card {
+    background:var(--card-bg); border:1px solid var(--border);
+    border-radius:20px; padding:2.25rem 1.8rem;
+    transition:transform .3s,border-color .3s,box-shadow .3s;
+    position:relative; overflow:hidden;
   }
 
-  .services-header .section-label {
-    justify-content: center;
+  .srv-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg,var(--crystal),var(--blue)); opacity:0; transition:opacity .3s;
   }
 
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
+  .srv-card:hover { transform:translateY(-5px); border-color:rgba(59,157,232,.25); box-shadow:0 18px 45px rgba(0,0,0,.3); }
+  .srv-card:hover::before { opacity:1; }
 
-  .service-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px;
-    padding: 2.5rem 2rem;
-    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
+  .srv-icon { font-size:2.4rem; margin-bottom:1.1rem; display:block; }
+  .srv-name { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:700; margin-bottom:.7rem; }
+  .srv-desc { font-size:.86rem; color:rgba(255,255,255,.52); line-height:1.7; margin-bottom:1.4rem; }
 
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--sky), var(--blue));
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
+  .srv-list { list-style:none; display:flex; flex-direction:column; gap:5px; }
+  .srv-list li { font-size:.8rem; color:rgba(255,255,255,.45); display:flex; align-items:center; gap:7px; }
+  .srv-list li::before { content:'✦'; color:var(--crystal); font-size:.55rem; }
 
-  .service-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(59,157,232,0.25);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-  }
-
-  .service-card:hover::before { opacity: 1; }
-
-  .service-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1.25rem;
-    display: block;
-  }
-
-  .service-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 0.75rem;
-  }
-
-  .service-desc {
-    font-size: 0.88rem;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-  }
-
-  .service-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .service-list li {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.5);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .service-list li::before {
-    content: '✦';
-    color: var(--sky);
-    font-size: 0.6rem;
-  }
-
-  /* ===== HOW WE WORK ===== */
+  /* ════════════════════════════════
+     HOW WE WORK
+  ════════════════════════════════ */
   #how-it-works {
-    padding: 7rem 0;
-    background: linear-gradient(180deg, #0c2040 0%, #071426 100%);
+    padding:7rem 0;
+    background:linear-gradient(180deg,#0c2040 0%,#071428 100%);
   }
 
-  .how-header {
-    text-align: center;
-    margin-bottom: 5rem;
+  .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; }
+
+  .steps::before {
+    content:''; position:absolute; top:50px;
+    left:calc(12.5% + 28px); right:calc(12.5% + 28px);
+    height:2px; background:linear-gradient(90deg,var(--crystal),rgba(59,157,232,.25)); z-index:0;
   }
 
-  .how-header .section-label { justify-content: center; }
+  .step { display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 1rem; position:relative; z-index:1; }
 
-  .steps-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    position: relative;
+  .step-ring {
+    width:100px; height:100px; border-radius:50%;
+    background:rgba(59,157,232,.09); border:2px solid rgba(59,157,232,.28);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:1.75rem; position:relative; transition:all .3s; cursor:default;
   }
 
-  /* .steps-container::before {
-    content: '';
-    position: absolute;
-    top: 52px;
-    left: calc(12.5% + 25px);
-    right: calc(12.5% + 25px);
-    height: 2px;
-    background: linear-gradient(90deg, var(--sky), rgba(59,157,232,0.3));
-    z-index: 0;
-  } */
+  .step:hover .step-ring { background:rgba(59,157,232,.18); border-color:var(--crystal); box-shadow:0 0 28px rgba(59,157,232,.3); }
 
-  .step {
-    display: flex;
+  .step-n { font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:700; color:var(--crystal); }
+
+  .step-pip {
+    position:absolute; top:-4px; right:-4px;
+    width:30px; height:30px; border-radius:50%;
+    background:var(--sky); display:flex; align-items:center; justify-content:center; font-size:13px;
+  }
+
+  .step-h { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:700; margin-bottom:.65rem; }
+  .step-p { font-size:.83rem; color:rgba(255,255,255,.48); line-height:1.65; }
+
+  /* ════════════════════════════════
+     PRICING
+  ════════════════════════════════ */
+  #pricing { padding:7rem 0; background:var(--deep); }
+
+  .tbl-wrap { overflow-x:auto; border-radius:18px; border:1px solid var(--border); }
+
+  table.ptbl { width:100%; border-collapse:collapse; background:rgba(255,255,255,.03); font-size:.88rem; }
+
+  .ptbl thead tr { background:linear-gradient(135deg,rgba(59,157,232,.18),rgba(26,109,181,.12)); }
+  .ptbl th { padding:1.1rem 1.4rem; text-align:left; font-size:.75rem; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--crystal); border-bottom:1px solid rgba(59,157,232,.18); }
+  .ptbl tbody tr { border-bottom:1px solid rgba(255,255,255,.05); transition:background .2s; }
+  .ptbl tbody tr:hover { background:rgba(59,157,232,.05); }
+  .ptbl td { padding:1rem 1.4rem; color:rgba(255,255,255,.72); vertical-align:middle; }
+  .ptbl td:first-child { color:var(--white); font-weight:500; }
+
+  .ptag { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:700; color:var(--gold); }
+  .ptag-n { font-size:.7rem; color:rgba(255,255,255,.3); margin-top:2px; }
+
+  .badge-ex { font-size:.68rem; background:rgba(201,168,76,.14); border:1px solid rgba(201,168,76,.28); color:var(--gold); padding:2px 8px; border-radius:20px; font-weight:600; }
+  .badge-pop { font-size:.68rem; background:rgba(59,157,232,.13); border:1px solid rgba(59,157,232,.25); color:var(--crystal); padding:2px 8px; border-radius:20px; font-weight:600; }
+
+  /* ════════════════════════════════
+     FAQs
+  ════════════════════════════════ */
+  #faqs { padding:7rem 0; background:linear-gradient(180deg,#071428 0%,#0c2040 100%); }
+
+  .faq-layout { display:grid; grid-template-columns:1fr 2fr; gap:5rem; align-items:start; }
+  .faq-side p { font-size:.98rem; color:rgba(255,255,255,.5); line-height:1.75; margin-top:1.4rem; }
+
+  .faq-list { display:flex; flex-direction:column; gap:.9rem; }
+
+  .faq-item {
+    background:var(--card-bg); border:1px solid var(--border);
+    border-radius:13px; overflow:hidden; transition:border-color .3s;
+  }
+
+  .faq-item.open { border-color:rgba(59,157,232,.3); }
+
+  .faq-q {
+    padding:1.15rem 1.4rem; font-size:.96rem; font-weight:500;
+    cursor:pointer; display:flex; justify-content:space-between; align-items:center;
+    user-select:none;
+  }
+
+  .faq-tog {
+    width:25px; height:25px; border-radius:50%;
+    background:rgba(59,157,232,.13); border:1px solid rgba(59,157,232,.22);
+    display:flex; align-items:center; justify-content:center;
+    font-size:.95rem; color:var(--crystal); flex-shrink:0;
+    transition:background .3s,transform .3s;
+  }
+
+  .faq-item.open .faq-tog { background:var(--sky); color:white; transform:rotate(45deg); }
+
+  .faq-a {
+    display:none; padding:0 1.4rem 1.15rem;
+    font-size:.88rem; color:rgba(255,255,255,.52); line-height:1.72;
+    border-top:1px solid rgba(255,255,255,.06);
+  }
+
+  .faq-item.open .faq-a { display:block; }
+
+  /* ════════════════════════════════
+     OWNER + TEAM
+  ════════════════════════════════ */
+  #owner { padding:7rem 0; background:var(--deep); }
+
+  .owner-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; }
+
+  /* Owner card */
+  .owner-card {
+    background:var(--card-bg); border:1px solid var(--border);
+    border-radius:24px; padding:2.5rem; position:relative; overflow:hidden;
+  }
+
+  .owner-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:4px;
+    background:linear-gradient(90deg,var(--gold),var(--sky));
+  }
+
+  .owner-photo {
+    width:100px; height:100px; border-radius:50%;
+    background:linear-gradient(135deg,rgba(59,157,232,.2),rgba(201,168,76,.15));
+    border:3px solid rgba(201,168,76,.35);
+    display:flex; align-items:center; justify-content:center;
+    font-size:3rem; margin-bottom:1.25rem;
+    box-shadow:0 6px 24px rgba(0,0,0,.25);
+  }
+
+  .owner-name-big {
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.9rem; font-weight:700; line-height:1.15; margin-bottom:.25rem;
+  }
+
+  .owner-role-tag {
+    font-size:.78rem; font-weight:600; letter-spacing:1px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:1.25rem;
+  }
+
+  .owner-bio-text {
+    font-size:.9rem; color:rgba(255,255,255,.58); line-height:1.8; margin-bottom:1.5rem;
+  }
+
+  .owner-certs { display:flex; flex-wrap:wrap; gap:.6rem; margin-bottom:1.75rem; }
+
+  .cert {
+    display:flex; align-items:center; gap:6px; padding:5px 12px;
+    background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+    border-radius:9px; font-size:.78rem; color:rgba(255,255,255,.65);
+  }
+
+  /* Contact chips inside owner card */
+  .owner-contacts { display:flex; flex-direction:column; gap:.6rem; }
+
+  .oc-row {
+    display:flex; align-items:center; gap:10px;
+    font-size:.87rem; color:rgba(255,255,255,.65);
+  }
+
+  .oc-icon { color:var(--crystal); font-size:1rem; flex-shrink:0; }
+
+  .oc-row a {
+    color:rgba(255,255,255,.65); text-decoration:none;
+    transition:color .2s;
+  }
+
+  .oc-row a:hover { color:var(--crystal); }
+
+  /* Team members side */
+  .team-side { display:flex; flex-direction:column; gap:1.1rem; }
+
+  .team-hdr { margin-bottom:.5rem; }
+
+  .team-card {
+    background:var(--card-bg); border:1px solid var(--border);
+    border-radius:16px; padding:1.4rem 1.5rem;
+    display:flex; align-items:flex-start; gap:1rem;
+    transition:border-color .3s,transform .3s;
+  }
+
+  .team-card:hover { border-color:rgba(59,157,232,.25); transform:translateX(4px); }
+
+  .team-avatar {
+    width:56px; height:56px; border-radius:50%; flex-shrink:0;
+    background:linear-gradient(135deg,rgba(59,157,232,.2),rgba(26,109,181,.12));
+    border:2px solid rgba(59,157,232,.25);
+    display:flex; align-items:center; justify-content:center; font-size:1.6rem;
+  }
+
+  .team-info { flex:1; min-width:0; }
+
+  .team-name { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:700; margin-bottom:.18rem; }
+  .team-pos { font-size:.76rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--crystal); margin-bottom:.5rem; }
+  .team-desc { font-size:.82rem; color:rgba(255,255,255,.5); line-height:1.6; }
+
+  .team-contacts { display:flex; flex-direction:column; gap:.3rem; margin-top:.6rem; }
+
+  .tc-row {
+    display:flex; align-items:center; gap:7px;
+    font-size:.8rem; color:rgba(255,255,255,.52);
+  }
+
+  .tc-row a { color:rgba(255,255,255,.52); text-decoration:none; transition:color .2s; }
+  .tc-row a:hover { color:var(--crystal); }
+
+  /* ════════════════════════════════
+     LOCATIONS
+  ════════════════════════════════ */
+  #locations { padding:7rem 0; background:linear-gradient(180deg,#0c2040 0%,#071428 100%); }
+
+  .loc-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+
+  .loc-card {
+    background:var(--card-bg); border:1px solid var(--border);
+    border-radius:22px; overflow:hidden; transition:border-color .3s;
+  }
+
+  .loc-card:hover { border-color:rgba(59,157,232,.25); }
+
+  .map-frame { width:100%; height:240px; position:relative; overflow:hidden; }
+  .map-frame iframe { width:100%; height:100%; border:none; }
+  .map-lbl {
+    position:absolute; top:10px; left:10px;
+    background:rgba(5,15,28,.85); backdrop-filter:blur(10px);
+    border:1px solid rgba(59,157,232,.3); color:var(--crystal);
+    font-size:.72rem; font-weight:600; letter-spacing:1px; text-transform:uppercase;
+    padding:4px 11px; border-radius:20px;
+  }
+
+  .loc-info { padding:1.6rem 1.8rem; }
+
+  .loc-name {
+    font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:700;
+    margin-bottom:.9rem; display:flex; align-items:center; gap:9px; flex-wrap:wrap;
+  }
+
+  .loc-badge {
+    font-size:.66rem; font-family:'DM Sans',sans-serif;
+    background:rgba(59,157,232,.13); border:1px solid rgba(59,157,232,.22);
+    color:var(--crystal); padding:3px 9px; border-radius:20px;
+    letter-spacing:1px; text-transform:uppercase; font-weight:600;
+  }
+
+  .loc-rows { display:flex; flex-direction:column; gap:.55rem; }
+  .loc-row { display:flex; align-items:flex-start; gap:9px; font-size:.85rem; color:rgba(255,255,255,.58); }
+  .loc-row .li { color:var(--crystal); font-size:.95rem; flex-shrink:0; margin-top:1px; }
+
+  /* ════════════════════════════════
+     FRANCHISE SECTION
+  ════════════════════════════════ */
+  #franchise { padding:7rem 0; background:var(--deep); }
+
+  .franchise-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+
+  .franchise-content .label { justify-content:flex-start; }
+
+  .franchise-content p {
+    font-size:1rem; color:rgba(255,255,255,.58); line-height:1.8;
+    font-weight:300; margin-top:1.2rem; margin-bottom:1.5rem;
+  }
+
+  .franchise-perks { display:flex; flex-direction:column; gap:.75rem; margin-bottom:2rem; }
+
+  .fperk {
+    display:flex; align-items:center; gap:12px;
+    padding:.85rem 1.1rem; background:var(--card-bg);
+    border:1px solid var(--border); border-radius:12px;
+    font-size:.9rem; color:rgba(255,255,255,.7);
+  }
+
+  .fperk-icon { font-size:1.2rem; flex-shrink:0; }
+
+  /* Contact form card */
+  .franchise-form-card {
+    background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+    border-radius:24px; padding:2.5rem; backdrop-filter:blur(16px);
+    position:relative; overflow:hidden;
+  }
+
+  .franchise-form-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg,var(--gold),var(--sky));
+  }
+
+  .form-title { font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:700; margin-bottom:.4rem; }
+  .form-sub { font-size:.85rem; color:rgba(255,255,255,.45); margin-bottom:1.75rem; }
+
+  .form-group { margin-bottom:1.1rem; }
+
+  .form-group label { display:block; font-size:.8rem; font-weight:600; letter-spacing:.5px; color:rgba(255,255,255,.55); margin-bottom:6px; }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width:100%; padding:10px 14px;
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+    border-radius:10px; color:var(--white); font-family:'DM Sans',sans-serif;
+    font-size:.9rem; outline:none; transition:border-color .25s;
+  }
+
+  .form-group textarea { resize:vertical; min-height:80px; }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color:rgba(59,157,232,.5); }
+
+  .form-group select option { background:#0b2040; color:var(--white); }
+
+  .franchise-cta-row { display:flex; flex-direction:column; gap:.8rem; margin-top:1.5rem; }
+
+  .fran-tel {
+    display:flex; align-items:center; gap:10px;
+    padding:12px 18px;
+    background:rgba(37,211,102,.1); border:1px solid rgba(37,211,102,.28);
+    border-radius:12px; text-decoration:none;
+    color:rgba(255,255,255,.8); font-size:.9rem; font-weight:500;
+    transition:background .25s;
+  }
+
+  .fran-tel:hover { background:rgba(37,211,102,.18); }
+
+  /* ════════════════════════════════
+     FOOTER
+  ════════════════════════════════ */
+  footer {
+    background:var(--navy); border-top:1px solid rgba(255,255,255,.07);
+    padding:4.5rem 0 2rem; position:relative; z-index:2;
+  }
+
+  .foot-grid { display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:4rem; padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,.07); margin-bottom:2rem; }
+
+  .foot-logo { display:flex; align-items:center; gap:11px; text-decoration:none; margin-bottom:1rem; }
+  .foot-gem { width:44px; height:44px; background:linear-gradient(135deg,var(--crystal),var(--sky),var(--blue)); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:21px; box-shadow:0 0 20px rgba(59,157,232,.35); flex-shrink:0; }
+  .foot-brand { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:700; }
+  .foot-brand em { font-style:italic; color:var(--crystal); }
+
+  .foot-tagline { font-size:.87rem; color:rgba(255,255,255,.38); line-height:1.7; margin-bottom:1.4rem; max-width:280px; }
+
+  /* Social icons */
+  .social-row { display:flex; gap:.7rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+
+  .soc-btn {
+    width:40px; height:40px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; text-decoration:none;
+    transition:transform .25s,box-shadow .25s;
+    border:1px solid rgba(255,255,255,.1);
+  }
+
+  .soc-btn:hover { transform:translateY(-3px); }
+
+  .soc-fb  { background:rgba(24,119,242,.2);  color:#1877f2; }
+  .soc-fb:hover  { background:#1877f2; color:white; box-shadow:0 6px 20px rgba(24,119,242,.4); }
+
+  .soc-ig  { background:rgba(225,48,108,.18); color:#e1306c; }
+  .soc-ig:hover  { background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:white; box-shadow:0 6px 20px rgba(225,48,108,.4); }
+
+  .soc-wa  { background:rgba(37,211,102,.18); color:#25d366; }
+  .soc-wa:hover  { background:#25d366; color:white; box-shadow:0 6px 20px rgba(37,211,102,.4); }
+
+  .soc-yt  { background:rgba(255,0,0,.18);   color:#ff0000; }
+  .soc-yt:hover  { background:#ff0000; color:white; box-shadow:0 6px 20px rgba(255,0,0,.4); }
+
+  .soc-tw  { background:rgba(29,161,242,.18); color:#1da1f2; }
+  .soc-tw:hover  { background:#1da1f2; color:white; box-shadow:0 6px 20px rgba(29,161,242,.4); }
+
+  .soc-gm  { background:rgba(234,67,53,.18);  color:#ea4335; }
+  .soc-gm:hover  { background:#ea4335; color:white; box-shadow:0 6px 20px rgba(234,67,53,.4); }
+
+  /* Footer contact rows */
+  .foot-contacts { display:flex; flex-direction:column; gap:.65rem; }
+
+  .fc-row { display:flex; align-items:flex-start; gap:9px; font-size:.85rem; color:rgba(255,255,255,.52); }
+  .fc-icon { color:var(--crystal); font-size:.95rem; flex-shrink:0; margin-top:1px; }
+  .fc-row a { color:rgba(255,255,255,.52); text-decoration:none; transition:color .2s; }
+  .fc-row a:hover { color:var(--crystal); }
+
+  .foot-col h4 {
+    font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:700;
+    margin-bottom:1.1rem; position:relative; padding-bottom:.65rem;
+  }
+
+  .foot-col h4::after { content:''; position:absolute; bottom:0; left:0; width:26px; height:2px; background:var(--crystal); border-radius:2px; }
+
+  .foot-links { list-style:none; display:flex; flex-direction:column; gap:.55rem; }
+
+  .foot-links a {
+    text-decoration:none; font-size:.86rem; color:rgba(255,255,255,.48);
+    transition:color .25s; display:flex; align-items:center; gap:6px;
+  }
+
+  .foot-links a::before { content:'→'; font-size:.72rem; color:var(--crystal); opacity:0; transition:opacity .25s; }
+  .foot-links a:hover { color:var(--white); }
+  .foot-links a:hover::before { opacity:1; }
+
+  .foot-bot { display:flex; justify-content:space-between; align-items:center; font-size:.78rem; color:rgba(255,255,255,.22); flex-wrap:wrap; gap:.5rem; }
+
+  /* ════════════════════════════════
+     SCROLL REVEAL
+  ════════════════════════════════ */
+  .reveal { opacity:0; transform:translateY(22px); transition:opacity .65s ease,transform .65s ease; }
+  .reveal.shown { opacity:1; transform:translateY(0); }
+
+  /* ════════════════════════════════
+     HAMBURGER MENU
+  ════════════════════════════════ */
+  .hamburger {
+    display: none;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 0 1rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .step-num-wrap {
-    width: 104px; height: 104px;
-    border-radius: 50%;
-    background: rgba(59,157,232,0.1);
-    border: 2px solid rgba(59,157,232,0.3);
-    display: flex;
-    align-items: center;
     justify-content: center;
-    margin-bottom: 2rem;
-    position: relative;
-    transition: all 0.3s;
-    cursor: default;
-  }
-
-  .step:hover .step-num-wrap {
-    background: rgba(59,157,232,0.2);
-    border-color: var(--sky);
-    box-shadow: 0 0 30px rgba(59,157,232,0.3);
-  }
-
-  .step-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--sky);
-  }
-
-  .step-icon-float {
-    position: absolute;
-    top: -5px; right: -5px;
-    width: 32px; height: 32px;
-    background: var(--sky);
-    border-radius: 50%;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 14px;
-  }
-
-  .step-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 0.75rem;
-  }
-
-  .step-desc {
-    font-size: 0.85rem;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.65;
-  }
-
-  /* ===== PRICING ===== */
-  #pricing {
-    padding: 7rem 0;
-    background: var(--deep);
-  }
-
-  .pricing-header {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-
-  .pricing-header .section-label { justify-content: center; }
-
-  .pricing-table-wrap {
-    overflow-x: auto;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.08);
-  }
-
-  table.pricing-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: rgba(255,255,255,0.03);
-    font-size: 0.9rem;
-  }
-
-  .pricing-table thead tr {
-    background: linear-gradient(135deg, rgba(59,157,232,0.2), rgba(26,109,181,0.15));
-  }
-
-  .pricing-table th {
-    padding: 1.25rem 1.5rem;
-    text-align: left;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--sky);
-    border-bottom: 1px solid rgba(59,157,232,0.2);
-  }
-
-  .pricing-table th:first-child { border-radius: 0; }
-
-  .pricing-table tbody tr {
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    gap: 5px;
+    width: 40px; height: 40px;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    flex-shrink: 0;
+    z-index: 1100;
     transition: background 0.2s;
   }
 
-  .pricing-table tbody tr:hover {
-    background: rgba(59,157,232,0.06);
+  .hamburger:hover { background: rgba(255,255,255,0.1); }
+
+  .hamburger span {
+    display: block;
+    width: 20px; height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
   }
 
-  .pricing-table td {
-    padding: 1.1rem 1.5rem;
-    color: rgba(255,255,255,0.75);
-    vertical-align: middle;
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile drawer */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px; left: 0; right: 0; bottom: 0;
+    background: rgba(5,15,28,0.98);
+    backdrop-filter: blur(24px);
+    z-index: 999;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    gap: 0;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
   }
 
-  .pricing-table td:first-child {
-    color: var(--white);
-    font-weight: 500;
+  .mobile-menu.open {
+    transform: translateX(0);
   }
 
-  .price-tag {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--gold);
-  }
-
-  .price-note {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.35);
-    margin-top: 2px;
-  }
-
-  .tag-express {
-    font-size: 0.7rem;
-    background: rgba(201,168,76,0.15);
-    border: 1px solid rgba(201,168,76,0.3);
-    color: var(--gold);
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-
-  .tag-popular {
-    font-size: 0.7rem;
-    background: rgba(59,157,232,0.15);
-    border: 1px solid rgba(59,157,232,0.3);
-    color: var(--sky);
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-weight: 600;
-  }
-
-  .pricing-note {
-    text-align: center;
-    margin-top: 1.5rem;
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.35);
-  }
-
-  /* ===== FAQs ===== */
-  #faqs {
-    padding: 7rem 0;
-    background: linear-gradient(180deg, #071426 0%, #0c2040 100%);
-  }
-
-  .faq-layout {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 5rem;
-    align-items: start;
-  }
-
-  .faq-sidebar p {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.7;
-    margin-top: 1.5rem;
-  }
-
-  .faq-list {
+  .mobile-menu-links {
+    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 
-  .faq-item {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    overflow: hidden;
-    transition: border-color 0.3s;
-  }
-
-  .faq-item.open {
-    border-color: rgba(59,157,232,0.3);
-  }
-
-  .faq-q {
-    padding: 1.25rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--white);
-    cursor: pointer;
+  .mobile-menu-links li a {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    user-select: none;
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: color 0.2s;
   }
 
-  .faq-toggle {
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    background: rgba(59,157,232,0.15);
-    border: 1px solid rgba(59,157,232,0.25);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem;
-    color: var(--sky);
-    flex-shrink: 0;
-    transition: background 0.3s, transform 0.3s;
+  .mobile-menu-links li a:hover { color: var(--crystal); }
+  .mobile-menu-links li a::after { content: '→'; font-size: 0.85rem; color: var(--crystal); }
+
+  .mobile-menu-links li a.mob-franchise {
+    color: var(--gold);
+    font-weight: 600;
   }
 
-  .faq-item.open .faq-toggle {
-    background: var(--sky);
-    color: white;
-    transform: rotate(45deg);
-  }
-
-  .faq-a {
-    display: none;
-    padding: 0 1.5rem 1.25rem;
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.7;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .faq-item.open .faq-a { display: block; }
-
-  /* ===== OWNER SECTION ===== */
-  #owner {
-    padding: 7rem 0;
-    background: var(--deep);
-  }
-
-  .owner-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 5rem;
-    align-items: center;
-  }
-
-  .owner-visual {
-    position: relative;
-  }
-
-  .owner-photo-frame {
-    width: 100%;
-    aspect-ratio: 4/5;
-    background: linear-gradient(145deg, rgba(59,157,232,0.15), rgba(26,109,181,0.08));
-    border: 1px solid rgba(59,157,232,0.2);
-    border-radius: 28px;
+  .mob-wa-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 8rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .owner-photo-frame::before {
-    content: '';
-    position: absolute;
-    bottom: -40px; right: -40px;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(59,157,232,0.15), transparent);
-  }
-
-  .owner-detail-card {
-    position: absolute;
-    bottom: -20px; right: -20px;
-    background: linear-gradient(135deg, var(--gold), #a07830);
-    border-radius: 16px;
-    padding: 1.25rem 1.5rem;
-    min-width: 160px;
-    text-align: center;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-  }
-
-  .owner-detail-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: white;
-    line-height: 1;
-  }
-
-  .owner-detail-label {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.8);
-    letter-spacing: 0.5px;
-    margin-top: 4px;
-  }
-
-  .owner-content .section-label { justify-content: flex-start; }
-
-  .owner-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--white);
-    line-height: 1.1;
-    margin-bottom: 0.5rem;
-  }
-
-  .owner-role {
-    font-size: 0.88rem;
-    color: var(--sky);
-    font-weight: 500;
-    letter-spacing: 1px;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-  }
-
-  .owner-bio {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.8;
-    font-weight: 300;
-    margin-bottom: 2rem;
-  }
-
-  .owner-certs {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
-  }
-
-  .cert-badge {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 10px;
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.7);
-  }
-
-  /* ===== LOCATIONS ===== */
-  #locations {
-    padding: 7rem 0;
-    background: linear-gradient(180deg, #0c2040 0%, #071426 100%);
-  }
-
-  .locations-header {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-
-  .locations-header .section-label { justify-content: center; }
-
-  .locations-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-
-  .location-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 24px;
-    overflow: hidden;
-    transition: border-color 0.3s;
-  }
-
-  .location-card:hover { border-color: rgba(59,157,232,0.25); }
-
-  .map-frame {
-    width: 100%;
-    height: 250px;
-    background: linear-gradient(135deg, #0d2040, #1a3a60);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .map-frame iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    filter: grayscale(30%) invert(5%);
-  }
-
-  .map-overlay-label {
-    position: absolute;
-    top: 12px; left: 12px;
-    background: rgba(7, 20, 38, 0.85);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(59,157,232,0.3);
-    color: var(--sky);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 5px 12px;
-    border-radius: 20px;
-  }
-
-  .location-info {
-    padding: 1.75rem 2rem;
-  }
-
-  .location-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
     gap: 10px;
-  }
-
-  .location-badge {
-    font-size: 0.68rem;
-    font-family: 'DM Sans', sans-serif;
-    background: rgba(59,157,232,0.15);
-    border: 1px solid rgba(59,157,232,0.25);
-    color: var(--sky);
-    padding: 3px 10px;
-    border-radius: 20px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  .location-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .loc-detail {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 0.87rem;
-    color: rgba(255,255,255,0.6);
-  }
-
-  .loc-icon {
-    color: var(--sky);
-    font-size: 1rem;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  /* ===== FOOTER ===== */
-  footer {
-    background: var(--navy);
-    border-top: 1px solid rgba(255,255,255,0.07);
-    padding: 4rem 0 2rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  .footer-main {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 4rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    margin-bottom: 2rem;
-  }
-
-  .footer-logo-wrap {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 1rem;
+    background: #25D366;
+    color: white !important;
     text-decoration: none;
+    border-radius: 14px;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.3);
+    transition: background 0.2s;
   }
 
-  .footer-logo-icon {
-    width: 46px; height: 46px;
-    background: linear-gradient(135deg, var(--sky), var(--blue));
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    box-shadow: 0 0 20px rgba(59,157,232,0.35);
-  }
+  .mob-wa-btn:hover { background: #1fba58; }
+  .mob-wa-btn::after { display:none !important; }
 
-  .footer-logo-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--white);
-  }
-
-  .footer-logo-name span { color: var(--sky); }
-
-  .footer-tagline {
+  .mob-timing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     font-size: 0.88rem;
-    color: rgba(255,255,255,0.4);
-    line-height: 1.7;
+    color: var(--gold);
+    font-weight: 500;
+    padding: 0.75rem;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
     margin-bottom: 1.5rem;
-    max-width: 280px;
   }
 
-  .footer-contact-list {
+  .mob-contacts {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
   }
 
-  .footer-contact-item {
+  .mob-contact-row {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
-    font-size: 0.87rem;
-    color: rgba(255,255,255,0.55);
-  }
-
-  .fc-icon {
-    color: var(--sky);
-    font-size: 1rem;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .footer-col h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 1.25rem;
-    position: relative;
-    padding-bottom: 0.75rem;
-  }
-
-  .footer-col h4::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 30px; height: 2px;
-    background: var(--sky);
-    border-radius: 2px;
-  }
-
-  .footer-links {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .footer-links a {
+    padding: 0.75rem 1rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
     text-decoration: none;
-    font-size: 0.88rem;
-    color: rgba(255,255,255,0.5);
-    transition: color 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .footer-links a::before {
-    content: '→';
-    font-size: 0.75rem;
-    color: var(--sky);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .footer-links a:hover { color: var(--white); }
-  .footer-links a:hover::before { opacity: 1; }
-
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.25);
-  }
-
-  /* ===== TIMING BAR ===== */
-  .timing-bar {
-    background: linear-gradient(135deg, rgba(59,157,232,0.12), rgba(26,109,181,0.08));
-    border: 1px solid rgba(59,157,232,0.2);
-    border-radius: 16px;
-    padding: 1.5rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 5rem;
-  }
-
-  .timing-head {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .timing-slots {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .timing-slot {
-    text-align: center;
-  }
-
-  .slot-day {
-    font-size: 0.72rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 3px;
-  }
-
-  .slot-time {
+    color: rgba(255,255,255,0.65);
     font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--white);
+    transition: border-color 0.2s;
   }
 
-  .slot-time.closed { color: rgba(255,80,80,0.8); }
+  .mob-contact-row:hover { border-color: rgba(59,157,232,0.3); }
 
-  /* ===== ANIMATIONS ===== */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  /* ════════════════════════════════
+     TABLET — 768px to 960px
+  ════════════════════════════════ */
+  @media (max-width: 960px) {
+    nav { padding: 0 1.25rem; }
 
-  .anim {
-    opacity: 0;
-    animation: fadeInUp 0.8s ease forwards;
-  }
-
-  .anim-1 { animation-delay: 0.1s; }
-  .anim-2 { animation-delay: 0.25s; }
-  .anim-3 { animation-delay: 0.4s; }
-  .anim-4 { animation-delay: 0.55s; }
-  .anim-5 { animation-delay: 0.7s; }
-
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 900px) {
-    nav { padding: 0 1.5rem; }
-    .nav-links { gap: 1.5rem; }
-    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .hero-visual { display: none; }
-    .about-grid, .owner-grid, .faq-layout { grid-template-columns: 1fr; gap: 3rem; }
-    .services-grid { grid-template-columns: 1fr 1fr; }
-    .steps-container { grid-template-columns: 1fr 1fr; }
-    .steps-container::before { display: none; }
-    .locations-grid { grid-template-columns: 1fr; }
-    .footer-main { grid-template-columns: 1fr; gap: 2rem; }
-  }
-
-  @media (max-width: 600px) {
     .nav-links { display: none; }
-    .services-grid { grid-template-columns: 1fr; }
-    .steps-container { grid-template-columns: 1fr; }
-    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    .hamburger { display: flex; }
+
+    .mobile-menu { display: flex; }
+
+    section { padding-left: 0; padding-right: 0; }
+
+    .inner { padding: 0 1.25rem; }
+
+    /* Hero */
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 3.5rem 0;
+    }
+    .hero-visual { display: none; }
+    .hero-title { font-size: clamp(2.4rem, 8vw, 3.5rem); }
+    .hero-sub { font-size: 1rem; max-width: 100%; }
+    .hero-stats { gap: 1.5rem; }
+    .stat-n { font-size: 2rem; }
+
+    /* About */
+    #about { padding: 4.5rem 0; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-img-wrap { height: 280px; }
+    .a-big { font-size: 4rem; }
+
+    /* Services */
+    #services { padding: 4.5rem 0; }
+    .srv-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* How it works */
+    #how-it-works { padding: 4.5rem 0; }
+    .steps {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .steps::before { display: none; }
+
+    /* Pricing */
+    #pricing { padding: 4.5rem 0; }
+
+    /* FAQs */
+    #faqs { padding: 4.5rem 0; }
+    .faq-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+
+    /* Owner */
+    #owner { padding: 4.5rem 0; }
+    .owner-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+    /* Locations */
+    #locations { padding: 4.5rem 0; }
+    .loc-grid { grid-template-columns: 1fr; }
+
+    /* Franchise */
+    #franchise { padding: 4.5rem 0; }
+    .franchise-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+    /* Footer */
+    footer { padding: 3rem 0 1.5rem; }
+    .foot-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .foot-tagline { max-width: 100%; }
+
+    /* Timing bar */
+    .timing-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+    .timing-slots { gap: 1.25rem; }
+
+    /* Section headers */
+    .sec-title { font-size: clamp(2rem, 6vw, 3rem); }
   }
 
-</style>
+  /* ════════════════════════════════
+     MOBILE — max 600px
+  ════════════════════════════════ */
+  @media (max-width: 600px) {
+    nav { height: 62px; }
 
+    .mobile-menu { top: 62px; }
+
+    .nav-logo-text { font-size: 1.2rem; }
+    .nav-logo-gem { width: 34px; height: 34px; font-size: 17px; border-radius: 9px; }
+
+    .inner { padding: 0 1rem; }
+
+    /* Hero */
+    #home { padding-top: 62px; }
+    .hero-grid { padding: 2.5rem 0; }
+    .hero-badge { font-size: 0.68rem; padding: 4px 12px; }
+    .hero-title { font-size: clamp(2rem, 9vw, 2.8rem); }
+    .hero-sub { font-size: 0.95rem; }
+    .hero-cta { flex-direction: column; }
+    .hero-cta a { width: 100%; justify-content: center; }
+    .hero-stats { grid-template-columns: 1fr 1fr; display: grid; gap: 1rem; }
+
+    /* About */
+    #about { padding: 3.5rem 0; }
+    .about-feats { grid-template-columns: 1fr; }
+    .about-img-wrap { height: 220px; }
+    .a-big { font-size: 3.5rem; }
+    .a-badge { width: 80px; height: 80px; }
+    .a-badge-n { font-size: 1.5rem; }
+
+    /* Services */
+    #services { padding: 3.5rem 0; }
+    .srv-grid { grid-template-columns: 1fr; }
+    .srv-card { padding: 1.75rem 1.4rem; }
+
+    /* How it works */
+    #how-it-works { padding: 3.5rem 0; }
+    .steps { grid-template-columns: 1fr; gap: 1.75rem; }
+    .step-ring { width: 84px; height: 84px; }
+    .step-n { font-size: 2rem; }
+
+    /* Pricing */
+    #pricing { padding: 3.5rem 0; }
+    .tbl-wrap { border-radius: 12px; }
+    .ptbl th, .ptbl td { padding: 0.8rem 1rem; font-size: 0.82rem; }
+    .ptag { font-size: 1rem; }
+
+    /* FAQs */
+    #faqs { padding: 3.5rem 0; }
+    .faq-q { font-size: 0.9rem; padding: 1rem 1.1rem; }
+    .faq-a { font-size: 0.84rem; padding: 0 1.1rem 1rem; }
+
+    /* Owner */
+    #owner { padding: 3.5rem 0; }
+    .owner-card { padding: 1.75rem; }
+    .owner-name-big { font-size: 1.6rem; }
+    .team-card { padding: 1.1rem; }
+    .team-avatar { width: 48px; height: 48px; font-size: 1.3rem; }
+    .team-name { font-size: 1.05rem; }
+
+    /* Locations */
+    #locations { padding: 3.5rem 0; }
+    .map-frame { height: 200px; }
+    .loc-info { padding: 1.25rem 1.25rem; }
+    .loc-name { font-size: 1.25rem; flex-direction: column; align-items: flex-start; gap: 6px; }
+
+    /* Franchise */
+    #franchise { padding: 3.5rem 0; }
+    .franchise-form-card { padding: 1.75rem; }
+    .fperk { font-size: 0.86rem; }
+
+    /* Footer */
+    footer { padding: 2.5rem 0 1.5rem; }
+    .foot-grid { gap: 1.75rem; }
+    .social-row { gap: 0.6rem; }
+    .soc-btn { width: 44px; height: 44px; }
+    .foot-bot { flex-direction: column; text-align: center; gap: 0.35rem; }
+
+    /* Buttons */
+    .btn-blue, .btn-gold, .btn-ghost { padding: 12px 22px; font-size: 0.88rem; }
+
+    /* Section labels / titles */
+    .sec-title { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+    .label { font-size: 0.7rem; }
+
+    /* Timing bar */
+    .timing-bar { padding: 1.25rem; gap: 1rem; }
+    .timing-slots { gap: 1rem; flex-wrap: wrap; }
+    .timing-bar .btn-blue { width: 100%; justify-content: center; }
+  }
+
+  /* ════════════════════════════════
+     VERY SMALL — max 380px
+  ════════════════════════════════ */
+  @media (max-width: 380px) {
+    .hero-title { font-size: 1.9rem; }
+    .nav-logo-text { font-size: 1.05rem; }
+    .owner-name-big { font-size: 1.4rem; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .ptbl th:nth-child(4), .ptbl td:nth-child(4),
+    .ptbl th:nth-child(6), .ptbl td:nth-child(6) { display: none; }
+  }
+</style>
 </head>
 <body>
 
-<!-- ===== BUBBLES ===== -->
-<div class="bubble-container" aria-hidden="true">
-  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
-  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
-  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
-  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
-  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
-  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
-  <div class="bubble"></div><div class="bubble"></div>
+<!-- ══════ BUBBLES ══════ -->
+<div id="bubbles" aria-hidden="true">
+  <div class="b"></div><div class="b"></div><div class="b"></div>
+  <div class="b"></div><div class="b"></div><div class="b"></div>
+  <div class="b"></div><div class="b"></div><div class="b"></div>
+  <div class="b"></div><div class="b"></div><div class="b"></div>
+  <div class="b"></div><div class="b"></div><div class="b"></div>
+  <div class="b"></div><div class="b"></div><div class="b"></div>
+  <div class="b"></div><div class="b"></div><div class="b"></div>
+  <div class="b"></div><div class="b"></div><div class="b"></div>
+  <div class="b"></div><div class="b"></div><div class="b"></div>
+  <div class="b"></div><div class="b"></div><div class="b"></div>
 </div>
 
-<!-- ===== NAVBAR ===== -->
+<!-- ══════ NAVBAR ══════ -->
 <nav>
   <a class="nav-logo" href="#home">
-    <div class="nav-logo-icon">💧</div>
-    <div class="nav-logo-text">Aqua<span>Press</span></div>
+    <div class="nav-logo-gem">💎</div>
+    <div class="nav-logo-text"><em>Glaze</em> Dry Cleaners</div>
   </a>
+
+  <!-- Hamburger (mobile only) -->
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#faqs">FAQs</a></li>
+    <li><a href="#franchise" class="nav-franchise">🤝 Franchise</a></li>
+
     <div class="nav-divider"></div>
+
+    <!-- WhatsApp direct link -->
+    <li>
+      <a class="nav-wa" href="https://wa.me/919876543210" target="_blank" rel="noopener">
+        <span class="wa-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </span>
+        WhatsApp · +91 98765 43210
+      </a>
+    </li>
+
+    <div class="nav-divider"></div>
+
     <li>
       <div class="nav-timing">
-        <div class="timing-dot"></div>
-        Open · 8AM – 9PM
+        <div class="open-dot"></div>
+        Open · 8AM–9PM
       </div>
     </li>
   </ul>
 </nav>
 
-<!-- ===== HERO ===== -->
+<!-- ══════ MOBILE MENU DRAWER ══════ -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="mobile-menu-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faqs">FAQs</a></li>
+    <li><a href="#owner">Our Team</a></li>
+    <li><a href="#locations">Shop Locations</a></li>
+    <li><a href="#franchise" class="mob-franchise">🤝 Franchise</a></li>
+  </ul>
+
+  <a class="mob-wa-btn" href="https://wa.me/919876543210" target="_blank" rel="noopener">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp · +91 98765 43210
+  </a>
+
+  <div class="mob-timing">
+    <div class="open-dot"></div>
+    Open Today · 8:00 AM – 9:00 PM
+  </div>
+
+  <div class="mob-contacts">
+    <a href="tel:+919876543210" class="mob-contact-row">
+      <span style="color:var(--crystal)">📞</span> +91 98765 43210 (Main)
+    </a>
+    <a href="tel:+919876543211" class="mob-contact-row">
+      <span style="color:var(--crystal)">📞</span> +91 98765 43211 (Gomti Nagar)
+    </a>
+    <a href="mailto:hello@glazecleaners.in" class="mob-contact-row">
+      <span style="color:var(--crystal)">✉️</span> hello@glazecleaners.in
+    </a>
+  </div>
+</div>
+
+<!-- ══════ HERO ══════ -->
 <section id="home">
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-badge anim anim-1">✦ Trusted Since 2008</div>
-      <h1 class="hero-title anim anim-2">
-        Your Clothes.<br>
-        <span class="accent">Perfectly</span><br>
-        <span class="gold">Pristine.</span>
-      </h1>
-      <p class="hero-subtitle anim anim-3">
-        Premium dry cleaning, laundry & garment care services delivered with precision, care, and a personal touch. Because your clothes deserve the best.
-      </p>
-      <div class="hero-cta anim anim-4">
-        <a href="#services" class="btn-primary">Our Services ↓</a>
-        <a href="#locations" class="btn-outline">Find a Shop</a>
-      </div>
-      <div class="hero-stats anim anim-5">
-        <div>
-          <div class="stat-num">15+</div>
-          <div class="stat-label">Years of Excellence</div>
+  <div class="inner">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">✦ Trusted Since 2008 · Lucknow</div>
+        <h1 class="hero-title">
+          Where Clothes<br>
+          Regain Their<br>
+          <span class="glaze">Glaze.</span>
+        </h1>
+        <p class="hero-sub">Premium dry cleaning, laundry &amp; garment care — delivered with precision, warmth, and expertise. Because your clothes deserve to look their finest.</p>
+        <div class="hero-cta">
+          <a href="#services" class="btn-blue">Explore Services ↓</a>
+          <a href="#locations" class="btn-ghost">Find a Shop</a>
         </div>
-        <div>
-          <div class="stat-num">12K+</div>
-          <div class="stat-label">Happy Customers</div>
-        </div>
-        <div>
-          <div class="stat-num">99%</div>
-          <div class="stat-label">Satisfaction Rate</div>
+        <div class="hero-stats">
+          <div><div class="stat-n">15+</div><div class="stat-l">Years of Excellence</div></div>
+          <div><div class="stat-n">12K+</div><div class="stat-l">Happy Customers</div></div>
+          <div><div class="stat-n">99%</div><div class="stat-l">Satisfaction Rate</div></div>
+          <div><div class="stat-n">2</div><div class="stat-l">Prime Locations</div></div>
         </div>
       </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-circle-bg"></div>
-      <div class="hero-card-main">
-        <div class="hero-card-icon">🧺</div>
-        <div class="hero-card-title">Premium Care</div>
-        <div class="hero-card-desc">Every garment handled with expert attention — from silks to suits, we do it right.</div>
-        <div class="hero-tags">
-          <span class="hero-tag">Dry Clean</span>
-          <span class="hero-tag">Laundry</span>
-          <span class="hero-tag">Ironing</span>
-          <span class="hero-tag">Alterations</span>
+      <div class="hero-visual">
+        <div class="hero-glow"></div>
+        <div class="hero-card">
+          <span class="hero-card-icon">💎</span>
+          <div class="hero-card-h">Premium Garment Care</div>
+          <p class="hero-card-p">Every fabric treated with expert hands — silks, suits, sarees, and everything in between.</p>
+          <div class="hero-tags">
+            <span class="hero-tag">Dry Clean</span>
+            <span class="hero-tag">Laundry</span>
+            <span class="hero-tag">Ironing</span>
+            <span class="hero-tag">Pickup</span>
+          </div>
         </div>
-      </div>
-      <div class="hero-float-card top-right">
-        <div style="font-size:1.4rem">⭐⭐⭐⭐⭐</div>
-        <div style="font-size:0.75rem; margin-top:4px; color:rgba(255,255,255,0.55)">4.9 / 5 Rating</div>
-      </div>
-      <div class="hero-float-card bottom-left">
-        <div class="float-icon">⚡</div>
-        <div>
-          <div style="font-weight:600">Express Ready</div>
-          <div style="font-size:0.75rem; color:rgba(255,255,255,0.5)">Same-day service</div>
+        <div class="fc-top">
+          <div style="font-size:1.3rem">⭐⭐⭐⭐⭐</div>
+          <div style="font-size:.72rem;color:rgba(255,255,255,.5);margin-top:3px">4.9 / 5 Rating</div>
+        </div>
+        <div class="fc-bot">
+          <span style="font-size:1.5rem">⚡</span>
+          <div>
+            <div style="font-weight:600;font-size:.88rem">Express Ready</div>
+            <div style="font-size:.72rem;color:rgba(255,255,255,.5)">Same-day service</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== ABOUT ===== -->
+<!-- ══════ ABOUT ══════ -->
 <section id="about">
-  <div class="section-inner">
+  <div class="inner">
     <div class="about-grid">
-      <div class="about-image-stack">
-        <div class="about-card-big">🧼</div>
-        <div class="about-card-small">
-          <div style="font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:6px;">Est. 2008</div>
-          <div style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:700; color:var(--white); line-height:1.3;">Lucknow's Most Trusted Laundry</div>
+      <div class="about-img-wrap reveal">
+        <div class="a-big">🧼</div>
+        <div class="a-small">
+          <div style="font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:5px">Est. 2008</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:700;line-height:1.3">Lucknow's Most Trusted Cleaners</div>
         </div>
-        <div class="about-badge-float">
-          <div class="about-badge-num">15</div>
-          <div class="about-badge-text">Years of<br>Service</div>
-        </div>
+        <div class="a-badge"><div class="a-badge-n">15</div><div class="a-badge-l">Years of<br>Service</div></div>
       </div>
-      <div class="about-content">
-        <div class="section-label">Who We Are</div>
-        <h2 class="section-title">Care That Goes <em>Beyond Clean</em></h2>
-        <p style="margin-top:1.5rem;">AquaPress has been Lucknow's go-to destination for premium garment care since 2008. We combine modern technology with skilled craftsmanship to deliver results that truly stand out.</p>
-        <p>From everyday laundry to your most delicate designer pieces, every item is treated with the highest care, using eco-friendly solvents and professional-grade equipment.</p>
-        <div class="about-features">
-          <div class="about-feat">
-            <div class="about-feat-icon">🌿</div>
-            <div class="about-feat-text"><strong>Eco-Friendly</strong>Green solvents, minimal waste</div>
-          </div>
-          <div class="about-feat">
-            <div class="about-feat-icon">⚡</div>
-            <div class="about-feat-text"><strong>Express Service</strong>Ready in 24 hours</div>
-          </div>
-          <div class="about-feat">
-            <div class="about-feat-icon">🛡️</div>
-            <div class="about-feat-text"><strong>Fully Insured</strong>Your clothes are protected</div>
-          </div>
-          <div class="about-feat">
-            <div class="about-feat-icon">🚗</div>
-            <div class="about-feat-text"><strong>Free Pickup</strong>We come to you</div>
-          </div>
+      <div class="reveal">
+        <div class="label">Who We Are</div>
+        <h2 class="sec-title">Care That Goes <em>Beyond Clean</em></h2>
+        <p style="margin-top:1.4rem;font-size:1rem;color:rgba(255,255,255,.6);line-height:1.8;">Glaze Dry Cleaners has been Lucknow's go-to destination for premium garment care since 2008. We combine modern technology with skilled craftsmanship to deliver results that truly stand out.</p>
+        <p style="margin-top:1rem;font-size:1rem;color:rgba(255,255,255,.6);line-height:1.8;">From everyday laundry to your most delicate designer pieces, every item is treated with the highest care — using eco-friendly solvents and professional-grade equipment.</p>
+        <div class="about-feats">
+          <div class="afeat"><div class="afeat-icon">🌿</div><div class="afeat-body"><strong>Eco-Friendly</strong>Green solvents, minimal waste</div></div>
+          <div class="afeat"><div class="afeat-icon">⚡</div><div class="afeat-body"><strong>Express Service</strong>Ready in 24 hours</div></div>
+          <div class="afeat"><div class="afeat-icon">🛡️</div><div class="afeat-body"><strong>Fully Insured</strong>Your clothes are protected</div></div>
+          <div class="afeat"><div class="afeat-icon">🚗</div><div class="afeat-body"><strong>Free Pickup</strong>We come to your door</div></div>
         </div>
       </div>
     </div>
 
-    <!-- Timing Bar -->
-    <div class="timing-bar">
+    <div class="timing-bar reveal">
       <div class="timing-head">🕐 Shop Hours</div>
       <div class="timing-slots">
-        <div class="timing-slot">
-          <div class="slot-day">Mon – Fri</div>
-          <div class="slot-time">8:00 AM – 9:00 PM</div>
-        </div>
-        <div class="timing-slot">
-          <div class="slot-day">Saturday</div>
-          <div class="slot-time">9:00 AM – 8:00 PM</div>
-        </div>
-        <div class="timing-slot">
-          <div class="slot-day">Sunday</div>
-          <div class="slot-time">10:00 AM – 6:00 PM</div>
-        </div>
-        <div class="timing-slot">
-          <div class="slot-day">Holidays</div>
-          <div class="slot-time closed">Closed</div>
-        </div>
+        <div class="t-slot"><div class="t-day">Mon – Fri</div><div class="t-time">8:00 AM – 9:00 PM</div></div>
+        <div class="t-slot"><div class="t-day">Saturday</div><div class="t-time">9:00 AM – 8:00 PM</div></div>
+        <div class="t-slot"><div class="t-day">Sunday</div><div class="t-time">10:00 AM – 6:00 PM</div></div>
+        <div class="t-slot"><div class="t-day">Holidays</div><div class="t-time closed">Closed</div></div>
       </div>
-      <a href="tel:+91XXXXXXXXXX" class="btn-primary" style="white-space:nowrap">📞 Call Now</a>
+      <a href="https://wa.me/919876543210" target="_blank" class="btn-blue" style="white-space:nowrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Us
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ===== SERVICES ===== -->
+<!-- ══════ SERVICES ══════ -->
 <section id="services">
-  <div class="section-inner">
-    <div class="services-header">
-      <div class="section-label">What We Offer</div>
-      <h2 class="section-title">Our <em>Services</em></h2>
-      <p style="margin-top:1rem; font-size:1rem; color:rgba(255,255,255,0.5); max-width:520px; margin-left:auto; margin-right:auto;">Expert garment care for every fabric, every occasion, every need.</p>
+  <div class="inner">
+    <div class="sec-hdr reveal">
+      <div class="label">What We Offer</div>
+      <h2 class="sec-title">Our <em>Services</em></h2>
+      <p style="margin-top:.9rem;font-size:.98rem;color:rgba(255,255,255,.48);max-width:500px;margin-left:auto;margin-right:auto;">Expert garment care for every fabric, every occasion, every need.</p>
     </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <span class="service-icon">👔</span>
-        <div class="service-name">Dry Cleaning</div>
-        <p class="service-desc">Solvent-based cleaning for delicate and special fabrics that can't tolerate water. Professional, gentle, and thorough.</p>
-        <ul class="service-list">
-          <li>Suits & Blazers</li>
-          <li>Sarees & Lehengas</li>
-          <li>Wedding Garments</li>
-          <li>Curtains & Drapes</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🧺</span>
-        <div class="service-name">Laundry & Wash</div>
-        <p class="service-desc">Complete laundry service — wash, dry, fold and pack. Fresh, clean clothes delivered back to you.</p>
-        <ul class="service-list">
-          <li>Daily Wear</li>
-          <li>Bedsheets & Linen</li>
-          <li>Bulk Laundry</li>
-          <li>Delicate Fabrics</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">♨️</span>
-        <div class="service-name">Steam Ironing</div>
-        <p class="service-desc">Professional steam ironing for crisp, wrinkle-free results. Perfect for daily wear and formal occasions alike.</p>
-        <ul class="service-list">
-          <li>Shirts & Trousers</li>
-          <li>Kurtas & Ethnic Wear</li>
-          <li>Business Formals</li>
-          <li>School Uniforms</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">✂️</span>
-        <div class="service-name">Alterations</div>
-        <p class="service-desc">Expert tailoring and alterations to ensure your garments fit perfectly every time.</p>
-        <ul class="service-list">
-          <li>Hemming & Fitting</li>
-          <li>Zipper Replacement</li>
-          <li>Button Repairs</li>
-          <li>Resizing</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🛋️</span>
-        <div class="service-name">Home Textiles</div>
-        <p class="service-desc">Deep cleaning for bulky home textiles — fresh, sanitized, and returned smelling wonderful.</p>
-        <ul class="service-list">
-          <li>Sofa Covers</li>
-          <li>Quilts & Blankets</li>
-          <li>Carpets & Rugs</li>
-          <li>Pillows & Cushions</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🚗</span>
-        <div class="service-name">Pickup & Delivery</div>
-        <p class="service-desc">Doorstep convenience — we collect your clothes, care for them, and deliver back to you fresh.</p>
-        <ul class="service-list">
-          <li>Free Home Pickup</li>
-          <li>Scheduled Delivery</li>
-          <li>Same-Day Express</li>
-          <li>Subscription Plans</li>
-        </ul>
-      </div>
+    <div class="srv-grid">
+      <div class="srv-card reveal"><span class="srv-icon">👔</span><div class="srv-name">Dry Cleaning</div><p class="srv-desc">Solvent-based cleaning for delicate and special fabrics. Professional, gentle, and thorough.</p><ul class="srv-list"><li>Suits &amp; Blazers</li><li>Sarees &amp; Lehengas</li><li>Wedding Garments</li><li>Curtains &amp; Drapes</li></ul></div>
+      <div class="srv-card reveal"><span class="srv-icon">🧺</span><div class="srv-name">Laundry &amp; Wash</div><p class="srv-desc">Complete laundry — wash, dry, fold and pack. Fresh, clean clothes delivered back.</p><ul class="srv-list"><li>Daily Wear</li><li>Bedsheets &amp; Linen</li><li>Bulk Laundry</li><li>Delicate Fabrics</li></ul></div>
+      <div class="srv-card reveal"><span class="srv-icon">♨️</span><div class="srv-name">Steam Ironing</div><p class="srv-desc">Professional steam ironing for crisp, wrinkle-free results — every time.</p><ul class="srv-list"><li>Shirts &amp; Trousers</li><li>Kurtas &amp; Ethnic Wear</li><li>Business Formals</li><li>School Uniforms</li></ul></div>
+      <div class="srv-card reveal"><span class="srv-icon">✂️</span><div class="srv-name">Alterations</div><p class="srv-desc">Expert tailoring and alterations to ensure your garments fit perfectly.</p><ul class="srv-list"><li>Hemming &amp; Fitting</li><li>Zipper Replacement</li><li>Button Repairs</li><li>Resizing</li></ul></div>
+      <div class="srv-card reveal"><span class="srv-icon">🛋️</span><div class="srv-name">Home Textiles</div><p class="srv-desc">Deep cleaning for bulky home textiles — fresh, sanitized, smelling wonderful.</p><ul class="srv-list"><li>Sofa Covers</li><li>Quilts &amp; Blankets</li><li>Carpets &amp; Rugs</li><li>Pillows &amp; Cushions</li></ul></div>
+      <div class="srv-card reveal"><span class="srv-icon">🚗</span><div class="srv-name">Pickup &amp; Delivery</div><p class="srv-desc">Doorstep convenience — we collect, care, and deliver back fresh.</p><ul class="srv-list"><li>Free Home Pickup</li><li>Scheduled Delivery</li><li>Same-Day Express</li><li>Subscription Plans</li></ul></div>
     </div>
   </div>
 </section>
 
-<!-- ===== HOW WE WORK ===== -->
+<!-- ══════ HOW WE WORK ══════ -->
 <section id="how-it-works">
-  <div class="section-inner">
-    <div class="how-header">
-      <div class="section-label">Our Process</div>
-      <h2 class="section-title">How It <em>Works</em></h2>
-      <p style="margin-top:1rem; font-size:1rem; color:rgba(255,255,255,0.5); max-width:500px; margin-left:auto; margin-right:auto;">Four simple steps from dirty to dazzling — easy, efficient, and entirely hassle-free.</p>
+  <div class="inner">
+    <div class="sec-hdr reveal">
+      <div class="label">Our Process</div>
+      <h2 class="sec-title">How It <em>Works</em></h2>
+      <p style="margin-top:.9rem;font-size:.98rem;color:rgba(255,255,255,.48);max-width:480px;margin-left:auto;margin-right:auto;">Four simple steps from dirty to dazzling — easy and entirely hassle-free.</p>
     </div>
-    <div class="steps-container">
-      <div class="step">
-        <div class="step-num-wrap">
-          <div class="step-num">01</div>
-          <div class="step-icon-float">📞</div>
-        </div>
-        <h3 class="step-title">Book a Pickup</h3>
-        <p class="step-desc">Call us, WhatsApp, or book online. We'll schedule a pickup at your convenience — at home or office.</p>
-      </div>
-      <div class="step">
-        <div class="step-num-wrap">
-          <div class="step-num">02</div>
-          <div class="step-icon-float">🔍</div>
-        </div>
-        <h3 class="step-title">Inspect & Tag</h3>
-        <p class="step-desc">Each garment is carefully inspected, tagged, and assessed for the right cleaning method.</p>
-      </div>
-      <div class="step">
-        <div class="step-num-wrap">
-          <div class="step-num">03</div>
-          <div class="step-icon-float">✨</div>
-        </div>
-        <h3 class="step-title">Expert Cleaning</h3>
-        <p class="step-desc">Your clothes go through our professional cleaning process — tailored to each fabric type.</p>
-      </div>
-      <div class="step">
-        <div class="step-num-wrap">
-          <div class="step-num">04</div>
-          <div class="step-icon-float">🚀</div>
-        </div>
-        <h3 class="step-title">Delivered Fresh</h3>
-        <p class="step-desc">Neatly packed and delivered back to your door — fresh, crisp, and ready to wear.</p>
-      </div>
+    <div class="steps">
+      <div class="step reveal"><div class="step-ring"><div class="step-n">01</div><div class="step-pip">📞</div></div><h3 class="step-h">Book a Pickup</h3><p class="step-p">Call us, WhatsApp, or walk in. We schedule a pickup at your convenience.</p></div>
+      <div class="step reveal"><div class="step-ring"><div class="step-n">02</div><div class="step-pip">🔍</div></div><h3 class="step-h">Inspect &amp; Tag</h3><p class="step-p">Each garment is inspected, tagged, and assessed for the right cleaning method.</p></div>
+      <div class="step reveal"><div class="step-ring"><div class="step-n">03</div><div class="step-pip">✨</div></div><h3 class="step-h">Expert Cleaning</h3><p class="step-p">Professional cleaning tailored to each fabric type and care requirement.</p></div>
+      <div class="step reveal"><div class="step-ring"><div class="step-n">04</div><div class="step-pip">🚀</div></div><h3 class="step-h">Delivered Fresh</h3><p class="step-p">Neatly packed and delivered back — fresh, crisp, and ready to wear.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ===== PRICING ===== -->
+<!-- ══════ PRICING ══════ -->
 <section id="pricing">
-  <div class="section-inner">
-    <div class="pricing-header">
-      <div class="section-label">Transparent Rates</div>
-      <h2 class="section-title">Simple <em>Pricing</em></h2>
-      <p style="margin-top:1rem; font-size:1rem; color:rgba(255,255,255,0.5);">No hidden charges. What you see is what you pay.</p>
+  <div class="inner">
+    <div class="sec-hdr reveal">
+      <div class="label">Transparent Rates</div>
+      <h2 class="sec-title">Simple <em>Pricing</em></h2>
+      <p style="margin-top:.9rem;font-size:.98rem;color:rgba(255,255,255,.48)">No hidden charges. What you see is what you pay.</p>
     </div>
-    <div class="pricing-table-wrap">
-      <table class="pricing-table">
+    <div class="tbl-wrap reveal">
+      <table class="ptbl">
         <thead>
           <tr>
             <th>Garment / Item</th>
             <th>Dry Clean</th>
-            <th>Wash & Fold</th>
+            <th>Wash &amp; Fold</th>
             <th>Iron Only</th>
             <th>Express (+50%)</th>
             <th>Notes</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Shirt / T-Shirt</td>
-            <td><div class="price-tag">₹80</div></td>
-            <td><div class="price-tag">₹40</div></td>
-            <td><div class="price-tag">₹20</div></td>
-            <td><span class="tag-express">Available</span></td>
-            <td><span style="color:rgba(255,255,255,0.4); font-size:0.8rem">Per piece</span></td>
-          </tr>
-          <tr>
-            <td>Trousers / Jeans</td>
-            <td><div class="price-tag">₹100</div></td>
-            <td><div class="price-tag">₹50</div></td>
-            <td><div class="price-tag">₹25</div></td>
-            <td><span class="tag-express">Available</span></td>
-            <td><span style="color:rgba(255,255,255,0.4); font-size:0.8rem">Per piece</span></td>
-          </tr>
-          <tr>
-            <td>Suit (2-piece)</td>
-            <td><div class="price-tag">₹350</div></td>
-            <td><div class="price-tag">₹180</div></td>
-            <td><div class="price-tag">₹80</div></td>
-            <td><span class="tag-express">Available</span></td>
-            <td><span class="tag-popular">Popular</span></td>
-          </tr>
-          <tr>
-            <td>Saree (Silk)</td>
-            <td><div class="price-tag">₹200</div></td>
-            <td><div class="price-tag">₹100</div></td>
-            <td><div class="price-tag">₹50</div></td>
-            <td><span class="tag-express">Available</span></td>
-            <td><span style="color:rgba(255,255,255,0.4); font-size:0.8rem">Gentle care</span></td>
-          </tr>
-          <tr>
-            <td>Lehenga / Sherwani</td>
-            <td><div class="price-tag">₹500</div><div class="price-note">From ₹500</div></td>
-            <td><div class="price-tag">₹250</div></td>
-            <td><div class="price-tag">₹120</div></td>
-            <td><span class="tag-express">Available</span></td>
-            <td><span class="tag-popular">Popular</span></td>
-          </tr>
-          <tr>
-            <td>Blanket / Quilt</td>
-            <td><div class="price-tag">₹300</div></td>
-            <td><div class="price-tag">₹150</div></td>
-            <td><div class="price-tag">₹60</div></td>
-            <td>—</td>
-            <td><span style="color:rgba(255,255,255,0.4); font-size:0.8rem">Size may vary</span></td>
-          </tr>
-          <tr>
-            <td>Curtains (per pair)</td>
-            <td><div class="price-tag">₹400</div></td>
-            <td><div class="price-tag">₹200</div></td>
-            <td><div class="price-tag">₹80</div></td>
-            <td>—</td>
-            <td><span style="color:rgba(255,255,255,0.4); font-size:0.8rem">Per pair</span></td>
-          </tr>
-          <tr>
-            <td>Bedsheet (Double)</td>
-            <td><div class="price-tag">₹150</div></td>
-            <td><div class="price-tag">₹80</div></td>
-            <td><div class="price-tag">₹40</div></td>
-            <td><span class="tag-express">Available</span></td>
-            <td><span style="color:rgba(255,255,255,0.4); font-size:0.8rem">Per piece</span></td>
-          </tr>
+          <tr><td>Shirt / T-Shirt</td><td><div class="ptag">₹80</div></td><td><div class="ptag">₹40</div></td><td><div class="ptag">₹20</div></td><td><span class="badge-ex">Available</span></td><td><span style="font-size:.78rem;color:rgba(255,255,255,.35)">Per piece</span></td></tr>
+          <tr><td>Trousers / Jeans</td><td><div class="ptag">₹100</div></td><td><div class="ptag">₹50</div></td><td><div class="ptag">₹25</div></td><td><span class="badge-ex">Available</span></td><td><span style="font-size:.78rem;color:rgba(255,255,255,.35)">Per piece</span></td></tr>
+          <tr><td>Suit (2-piece)</td><td><div class="ptag">₹350</div></td><td><div class="ptag">₹180</div></td><td><div class="ptag">₹80</div></td><td><span class="badge-ex">Available</span></td><td><span class="badge-pop">Popular</span></td></tr>
+          <tr><td>Saree (Silk)</td><td><div class="ptag">₹200</div></td><td><div class="ptag">₹100</div></td><td><div class="ptag">₹50</div></td><td><span class="badge-ex">Available</span></td><td><span style="font-size:.78rem;color:rgba(255,255,255,.35)">Gentle care</span></td></tr>
+          <tr><td>Lehenga / Sherwani</td><td><div class="ptag">₹500</div><div class="ptag-n">From ₹500</div></td><td><div class="ptag">₹250</div></td><td><div class="ptag">₹120</div></td><td><span class="badge-ex">Available</span></td><td><span class="badge-pop">Popular</span></td></tr>
+          <tr><td>Blanket / Quilt</td><td><div class="ptag">₹300</div></td><td><div class="ptag">₹150</div></td><td><div class="ptag">₹60</div></td><td>—</td><td><span style="font-size:.78rem;color:rgba(255,255,255,.35)">Size may vary</span></td></tr>
+          <tr><td>Curtains (per pair)</td><td><div class="ptag">₹400</div></td><td><div class="ptag">₹200</div></td><td><div class="ptag">₹80</div></td><td>—</td><td><span style="font-size:.78rem;color:rgba(255,255,255,.35)">Per pair</span></td></tr>
+          <tr><td>Bedsheet (Double)</td><td><div class="ptag">₹150</div></td><td><div class="ptag">₹80</div></td><td><div class="ptag">₹40</div></td><td><span class="badge-ex">Available</span></td><td><span style="font-size:.78rem;color:rgba(255,255,255,.35)">Per piece</span></td></tr>
         </tbody>
       </table>
     </div>
-    <p class="pricing-note">💡 Prices are indicative. Final cost confirmed at inspection. GST applicable as per norms. Bulk & subscription discounts available.</p>
+    <p style="text-align:center;margin-top:1.4rem;font-size:.8rem;color:rgba(255,255,255,.3)">💡 Prices are indicative. Final cost confirmed at inspection. GST applicable. Bulk &amp; subscription discounts available.</p>
   </div>
 </section>
 
-<!-- ===== FAQs ===== -->
+<!-- ══════ FAQs ══════ -->
 <section id="faqs">
-  <div class="section-inner">
+  <div class="inner">
     <div class="faq-layout">
-      <div class="faq-sidebar">
-        <div class="section-label">Common Questions</div>
-        <h2 class="section-title">Got <em>Questions?</em></h2>
-        <p>We've answered the most common queries below. Still have doubts? Feel free to call us or walk into either of our shops — we're always happy to help.</p>
-        <a href="tel:+91XXXXXXXXXX" class="btn-primary" style="margin-top:2rem; display:inline-flex">📞 Talk to Us</a>
+      <div class="faq-side reveal">
+        <div class="label">Common Questions</div>
+        <h2 class="sec-title">Got <em>Questions?</em></h2>
+        <p>We've answered the most common queries below. Still unsure? Walk into any of our shops or message us on WhatsApp — we're always happy to help.</p>
+        <a href="https://wa.me/919876543210" target="_blank" class="btn-blue" style="margin-top:2rem">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </a>
       </div>
-      <div class="faq-list">
-        <div class="faq-item open" onclick="toggleFaq(this)">
-          <div class="faq-q">How long does dry cleaning take? <span class="faq-toggle">+</span></div>
-          <div class="faq-a">Standard dry cleaning takes 48–72 hours depending on the garment type. For express service, most items are ready within 24 hours for an additional charge of 50%.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-q">Do you offer home pickup and delivery? <span class="faq-toggle">+</span></div>
-          <div class="faq-a">Yes! We offer free home pickup and delivery within a 5 km radius of our shops. For areas beyond that, a small delivery charge applies. You can schedule via call or WhatsApp.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-q">Are my clothes insured while in your care? <span class="faq-toggle">+</span></div>
-          <div class="faq-a">Absolutely. All garments left with us are fully insured against damage or loss during the cleaning process. We take full responsibility from the moment we receive your clothes.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-q">What if my garment is damaged during cleaning? <span class="faq-toggle">+</span></div>
-          <div class="faq-a">In the rare event of damage caused by our process, we will compensate you based on the garment's current value. Our team is trained to prevent such situations, and we handle every item with utmost care.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-q">Do you use eco-friendly solvents? <span class="faq-toggle">+</span></div>
-          <div class="faq-a">Yes, we use environment-friendly, non-toxic cleaning agents that are safe for fabrics, people, and the planet. We are committed to sustainable practices in all our operations.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-q">Can I drop off clothes anytime during shop hours? <span class="faq-toggle">+</span></div>
-          <div class="faq-a">Yes, walk-ins are always welcome! Both our shops are open Monday–Friday 8AM–9PM, Saturday 9AM–8PM, and Sunday 10AM–6PM. No appointment needed for drop-offs.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-q">Do you offer subscription or monthly plans? <span class="faq-toggle">+</span></div>
-          <div class="faq-a">Yes! We have monthly subscription plans for regular customers — great for families and professionals. Plans start at ₹999/month and include weekly pickups, priority processing, and a 20% discount on all services.</div>
-        </div>
+      <div class="faq-list reveal">
+        <div class="faq-item open" onclick="toggleFaq(this)"><div class="faq-q">How long does dry cleaning take? <span class="faq-tog">+</span></div><div class="faq-a">Standard dry cleaning takes 48–72 hours. Express service is ready in 24 hours for +50% charge.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Do you offer home pickup and delivery? <span class="faq-tog">+</span></div><div class="faq-a">Yes! Free home pickup within 5 km of our shops. Book via call or WhatsApp at +91 98765 43210.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Are my clothes insured while in your care? <span class="faq-tog">+</span></div><div class="faq-a">All garments are fully insured against damage or loss during the cleaning process.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What if my garment is damaged? <span class="faq-tog">+</span></div><div class="faq-a">In the rare event of damage, we compensate based on the garment's current value. Our trained team prevents such situations.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Do you use eco-friendly solvents? <span class="faq-tog">+</span></div><div class="faq-a">Yes — we use environment-friendly, non-toxic cleaning agents safe for fabrics, people, and the planet.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Do you offer monthly subscription plans? <span class="faq-tog">+</span></div><div class="faq-a">Yes! Plans from ₹999/month — weekly pickups, priority processing, and 20% discount on all services.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How can I inquire about franchise opportunities? <span class="faq-tog">+</span></div><div class="faq-a">Visit our Franchise section below or call us directly at +91 98765 43210. We'd love to discuss partnership opportunities with you.</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== OWNER ===== -->
+<!-- ══════ OWNER + TEAM ══════ -->
 <section id="owner">
-  <div class="section-inner">
+  <div class="inner">
+    <div class="sec-hdr reveal" style="text-align:center;margin-bottom:3.5rem">
+      <div class="label" style="justify-content:center">Meet the People Behind Glaze</div>
+      <h2 class="sec-title">Our <em>Owner &amp; Team</em></h2>
+      <p style="margin-top:.9rem;font-size:.98rem;color:rgba(255,255,255,.48);max-width:520px;margin-left:auto;margin-right:auto;">Experienced, passionate, and dedicated to making your clothes look their absolute best.</p>
+    </div>
+
     <div class="owner-grid">
-      <div class="owner-visual">
-        <div class="owner-photo-frame">🧑‍💼</div>
-        <div class="owner-detail-card">
-          <div class="owner-detail-num">15+</div>
-          <div class="owner-detail-label">Years Experience</div>
-        </div>
-      </div>
-      <div class="owner-content">
-        <div class="section-label">Meet the Owner</div>
-        <div class="owner-name">Rajesh Kumar<br>Sharma</div>
-        <div class="owner-role">Founder & Master Cleaner · AquaPress</div>
-        <p class="owner-bio">
-          With over 15 years in the garment care industry, Rajesh started AquaPress with a simple vision — to provide the residents of Lucknow with a laundry service they could genuinely trust. What began as a small shop in Hazratganj has grown into one of the city's most beloved dry cleaning establishments.
-        </p>
-        <p class="owner-bio">
-          Trained in advanced garment care techniques in Delhi and certified by the Textile Care Allied Trades Association (TCATA), Rajesh personally oversees quality control at both shop locations. He believes that clean clothes aren't just about appearance — they're about confidence and dignity.
+
+      <!-- LEFT: Owner -->
+      <div class="owner-card reveal">
+        <div class="owner-photo">👨‍💼</div>
+        <div class="owner-name-big">Rajesh Kumar<br>Sharma</div>
+        <div class="owner-role-tag">👑 Founder &amp; Owner · Glaze Dry Cleaners</div>
+        <p class="owner-bio-text">
+          With over 15 years in garment care, Rajesh started Glaze with a vision — giving Lucknow a laundry service they could genuinely trust. Trained in Delhi and certified by TCATA, he personally oversees quality at both shop locations.
         </p>
         <div class="owner-certs">
-          <div class="cert-badge">🏆 TCATA Certified</div>
-          <div class="cert-badge">🌿 Eco-Clean Approved</div>
-          <div class="cert-badge">⭐ ISO 9001 Quality</div>
+          <span class="cert">🏆 TCATA Certified</span>
+          <span class="cert">🌿 Eco-Clean Approved</span>
+          <span class="cert">⭐ ISO 9001</span>
+        </div>
+        <div class="owner-contacts">
+          <div class="oc-row">
+            <span class="oc-icon">📞</span>
+            <a href="tel:+919876543210">+91 98765 43210</a>
+          </div>
+          <div class="oc-row">
+            <span class="oc-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </span>
+            <a href="https://wa.me/919876543210" target="_blank">WhatsApp: +91 98765 43210</a>
+          </div>
+          <div class="oc-row">
+            <span class="oc-icon">✉️</span>
+            <a href="mailto:rajesh@glazecleaners.in">rajesh@glazecleaners.in</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Team Members -->
+      <div class="team-side">
+        <div class="team-hdr reveal">
+          <div class="label">Our Expert Team</div>
+        </div>
+
+        <div class="team-card reveal">
+          <div class="team-avatar">👩‍💼</div>
+          <div class="team-info">
+            <div class="team-name">Priya Verma</div>
+            <div class="team-pos">Branch Manager · Hazratganj</div>
+            <div class="team-desc">8 years in garment care operations. Expert in customer relations and daily quality oversight.</div>
+            <div class="team-contacts">
+              <div class="tc-row"><span style="color:var(--crystal)">📞</span><a href="tel:+919876543211">+91 98765 43211</a></div>
+              <div class="tc-row">
+                <span><svg width="13" height="13" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
+                <a href="https://wa.me/919876543211" target="_blank">WhatsApp: +91 98765 43211</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card reveal">
+          <div class="team-avatar">👨‍🔧</div>
+          <div class="team-info">
+            <div class="team-name">Anil Mishra</div>
+            <div class="team-pos">Head Cleaner · Gomti Nagar</div>
+            <div class="team-desc">12 years of hands-on garment cleaning expertise. Specialist in silk, wool, and bridal wear.</div>
+            <div class="team-contacts">
+              <div class="tc-row"><span style="color:var(--crystal)">📞</span><a href="tel:+919876543212">+91 98765 43212</a></div>
+              <div class="tc-row">
+                <span><svg width="13" height="13" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
+                <a href="https://wa.me/919876543212" target="_blank">WhatsApp: +91 98765 43212</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card reveal">
+          <div class="team-avatar">👩‍🎨</div>
+          <div class="team-info">
+            <div class="team-name">Sunita Gupta</div>
+            <div class="team-pos">Alteration &amp; Stitch Expert</div>
+            <div class="team-desc">Certified tailor with 10 years in precision alterations, fittings, and garment restoration.</div>
+            <div class="team-contacts">
+              <div class="tc-row"><span style="color:var(--crystal)">📞</span><a href="tel:+919876543213">+91 98765 43213</a></div>
+              <div class="tc-row">
+                <span><svg width="13" height="13" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
+                <a href="https://wa.me/919876543213" target="_blank">WhatsApp: +91 98765 43213</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card reveal">
+          <div class="team-avatar">🧑‍💻</div>
+          <div class="team-info">
+            <div class="team-name">Mohd. Faiz Khan</div>
+            <div class="team-pos">Pickup &amp; Delivery Coordinator</div>
+            <div class="team-desc">Manages all pickup/delivery logistics across Lucknow. Punctual, reliable, always on time.</div>
+            <div class="team-contacts">
+              <div class="tc-row"><span style="color:var(--crystal)">📞</span><a href="tel:+919876543214">+91 98765 43214</a></div>
+              <div class="tc-row">
+                <span><svg width="13" height="13" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
+                <a href="https://wa.me/919876543214" target="_blank">WhatsApp: +91 98765 43214</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== LOCATIONS ===== -->
+<!-- ══════ LOCATIONS ══════ -->
 <section id="locations">
-  <div class="section-inner">
-    <div class="locations-header">
-      <div class="section-label">Find Us</div>
-      <h2 class="section-title">Our <em>Shop Locations</em></h2>
-      <p style="margin-top:1rem; font-size:1rem; color:rgba(255,255,255,0.5);">Visit us at either of our two convenient locations in Lucknow.</p>
+  <div class="inner">
+    <div class="sec-hdr reveal" style="text-align:center;margin-bottom:3rem">
+      <div class="label" style="justify-content:center">Find Us</div>
+      <h2 class="sec-title">Our <em>Shop Locations</em></h2>
+      <p style="margin-top:.9rem;font-size:.98rem;color:rgba(255,255,255,.48)">Two convenient locations across Lucknow — come visit us!</p>
     </div>
-    <div class="locations-grid">
-      <!-- Shop 1 -->
-      <div class="location-card">
+    <div class="loc-grid">
+      <div class="loc-card reveal">
         <div class="map-frame">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.5!2d80.946!3d26.847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zSGF6cmF0Z2Fuaiwg!5e0!3m2!1sen!2sin!4v1"
-            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-          <div class="map-overlay-label">Shop 1 · Hazratganj</div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.5!2d80.946!3d26.847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zSGF6cmF0Z2Fuaiwg!5e0!3m2!1sen!2sin!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div class="map-lbl">Shop 1 · Hazratganj</div>
         </div>
-        <div class="location-info">
-          <div class="location-name">
-            AquaPress — Hazratganj
-            <span class="location-badge">Main Branch</span>
-          </div>
-          <div class="location-details">
-            <div class="loc-detail">
-              <span class="loc-icon">📍</span>
-              <span>12, Rana Pratap Marg, Hazratganj, Lucknow, UP – 226001</span>
-            </div>
-            <div class="loc-detail">
-              <span class="loc-icon">📞</span>
-              <span>+91 98765 43210</span>
-            </div>
-            <div class="loc-detail">
-              <span class="loc-icon">✉️</span>
-              <span>hazratganj@aquapress.in</span>
-            </div>
-            <div class="loc-detail">
-              <span class="loc-icon">🕐</span>
-              <span>Mon–Fri: 8AM–9PM &nbsp;|&nbsp; Sat: 9AM–8PM &nbsp;|&nbsp; Sun: 10AM–6PM</span>
-            </div>
-            <div class="loc-detail">
-              <span class="loc-icon">🚗</span>
-              <span>Parking available. Near Hazratganj Metro Exit 2.</span>
-            </div>
+        <div class="loc-info">
+          <div class="loc-name">Glaze — Hazratganj <span class="loc-badge">Main Branch</span></div>
+          <div class="loc-rows">
+            <div class="loc-row"><span class="li">📍</span><span>12, Rana Pratap Marg, Hazratganj, Lucknow – 226001</span></div>
+            <div class="loc-row"><span class="li">📞</span><a href="tel:+919876543210" style="color:inherit;text-decoration:none">+91 98765 43210</a></div>
+            <div class="loc-row"><span class="li">✉️</span><span>hazratganj@glazecleaners.in</span></div>
+            <div class="loc-row"><span class="li">🕐</span><span>Mon–Fri 8AM–9PM · Sat 9AM–8PM · Sun 10AM–6PM</span></div>
           </div>
         </div>
       </div>
-
-      <!-- Shop 2 -->
-      <div class="location-card">
+      <div class="loc-card reveal">
         <div class="map-frame">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.2!2d80.995!3d26.842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zR29tdGkgTmFnYXI!5e0!3m2!1sen!2sin!4v1"
-            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-          <div class="map-overlay-label">Shop 2 · Gomti Nagar</div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.2!2d80.995!3d26.842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zR29tdGkgTmFnYXI!5e0!3m2!1sen!2sin!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div class="map-lbl">Shop 2 · Gomti Nagar</div>
         </div>
-        <div class="location-info">
-          <div class="location-name">
-            AquaPress — Gomti Nagar
-            <span class="location-badge">Branch</span>
-          </div>
-          <div class="location-details">
-            <div class="loc-detail">
-              <span class="loc-icon">📍</span>
-              <span>B-45, Viraj Khand, Gomti Nagar, Lucknow, UP – 226010</span>
-            </div>
-            <div class="loc-detail">
-              <span class="loc-icon">📞</span>
-              <span>+91 98765 43211</span>
-            </div>
-            <div class="loc-detail">
-              <span class="loc-icon">✉️</span>
-              <span>gomtinagar@aquapress.in</span>
-            </div>
-            <div class="loc-detail">
-              <span class="loc-icon">🕐</span>
-              <span>Mon–Fri: 8AM–9PM &nbsp;|&nbsp; Sat: 9AM–8PM &nbsp;|&nbsp; Sun: 10AM–6PM</span>
-            </div>
-            <div class="loc-detail">
-              <span class="loc-icon">🚗</span>
-              <span>Ample street parking. 5 min from Viraj Khand Market.</span>
-            </div>
+        <div class="loc-info">
+          <div class="loc-name">Glaze — Gomti Nagar <span class="loc-badge">Branch</span></div>
+          <div class="loc-rows">
+            <div class="loc-row"><span class="li">📍</span><span>B-45, Viraj Khand, Gomti Nagar, Lucknow – 226010</span></div>
+            <div class="loc-row"><span class="li">📞</span><a href="tel:+919876543211" style="color:inherit;text-decoration:none">+91 98765 43211</a></div>
+            <div class="loc-row"><span class="li">✉️</span><span>gomtinagar@glazecleaners.in</span></div>
+            <div class="loc-row"><span class="li">🕐</span><span>Mon–Fri 8AM–9PM · Sat 9AM–8PM · Sun 10AM–6PM</span></div>
           </div>
         </div>
       </div>
@@ -1921,134 +1680,200 @@
   </div>
 </section>
 
-<!-- ===== FRANCHISE ===== -->
+<!-- ══════ FRANCHISE ══════ -->
 <section id="franchise">
-  <div class="section-inner">
-    <div style="text-align:center; max-width:700px; margin:auto;">
-      <div class="section-label" style="justify-content:center;">Grow With Us</div>
-      <h2 class="section-title">Start Your <em>Franchise</em></h2>
-      <p style="margin-top:1rem; color:rgba(255,255,255,0.6);">
-        Join AquaPress and build your own successful laundry business with our trusted brand,
-        proven system, and full support.
-      </p>
-
-      <div style="margin-top:2rem; background:rgba(255,255,255,0.05); padding:2rem; border-radius:20px; border:1px solid rgba(255,255,255,0.08);">
-        <h3 style="margin-bottom:1rem;">📞 Contact for Franchise</h3>
-        <p style="margin-bottom:1rem;">Call or WhatsApp us to get started:</p>
-
-        <a href="tel:+919999999999" class="btn-primary">Call Now</a>
-
-        <a href="https://wa.me/919999999999" target="_blank" class="btn-outline" style="margin-left:10px;">
-          💬 WhatsApp
-        </a>
-      </div>
-    </div>
-  </div>
-</br>
-
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer>
-  <div class="section-inner">
-    <div class="footer-main">
-      <!-- Logo + Contacts -->
-      <div>
-        <a class="footer-logo-wrap" href="#home">
-          <div class="footer-logo-icon">💧</div>
-          <div class="footer-logo-name">Aqua<span>Press</span></div>
-        </a>
-        <p class="footer-tagline">
-          Lucknow's premier dry cleaning and laundry service. Pristine clothes, trusted care, and a smile — since 2008.
-        </p>
-        <div class="footer-contact-list">
-          <div class="footer-contact-item">
-            <span class="fc-icon">📞</span>
-            <span>+91 98765 43210 &nbsp;|&nbsp; +91 98765 43211</span>
-          </div>
-          <div class="footer-contact-item">
-            <span class="fc-icon">✉️</span>
-            <span>hello@aquapress.in</span>
-          </div>
-          <div class="footer-contact-item">
-            <span class="fc-icon">📍</span>
-            <span>12 Rana Pratap Marg, Hazratganj, Lucknow &<br>B-45 Viraj Khand, Gomti Nagar, Lucknow</span>
-          </div>
+  <div class="inner">
+    <div class="franchise-grid">
+      <div class="franchise-content reveal">
+        <div class="label">Business Opportunity</div>
+        <h2 class="sec-title">Own a <em>Glaze</em><br>Franchise</h2>
+        <p>Partner with Lucknow's most trusted dry cleaning brand. We provide everything you need to launch and run a successful Glaze outlet — from training to equipment to brand support.</p>
+        <div class="franchise-perks">
+          <div class="fperk"><span class="fperk-icon">🏪</span>Full shop setup guidance and equipment support</div>
+          <div class="fperk"><span class="fperk-icon">📋</span>Comprehensive staff training program</div>
+          <div class="fperk"><span class="fperk-icon">📣</span>Marketing materials &amp; brand assets included</div>
+          <div class="fperk"><span class="fperk-icon">💰</span>Low investment, high return model</div>
+          <div class="fperk"><span class="fperk-icon">🤝</span>Ongoing operational support from our team</div>
+          <div class="fperk"><span class="fperk-icon">🌍</span>Exclusive territory rights in your area</div>
+        </div>
+        <div style="margin-top:1rem">
+          <p style="font-size:.88rem;color:rgba(255,255,255,.5);margin-bottom:.8rem">Ready to talk? Call our franchise team directly:</p>
+          <a href="tel:+919876543210" class="btn-gold" style="margin-right:.8rem">📞 +91 98765 43210</a>
+          <a href="https://wa.me/919876543210?text=Hi%2C+I%27m+interested+in+a+Glaze+Dry+Cleaners+franchise." target="_blank" class="nav-wa" style="display:inline-flex;border-radius:50px!important;padding:13px 22px!important">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp Us
+          </a>
         </div>
       </div>
 
-      <!-- Services Links -->
-      <div class="footer-col">
+      <div class="franchise-form-card reveal">
+        <div class="form-title">Get in Touch</div>
+        <div class="form-sub">Fill this form and we'll contact you within 24 hours.</div>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+91 XXXXX XXXXX">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label>City / Location</label>
+          <input type="text" placeholder="Where you want to open the franchise">
+        </div>
+        <div class="form-group">
+          <label>Investment Capacity</label>
+          <select>
+            <option value="">Select range</option>
+            <option>₹2–5 Lakhs</option>
+            <option>₹5–10 Lakhs</option>
+            <option>₹10–20 Lakhs</option>
+            <option>₹20 Lakhs+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message (Optional)</label>
+          <textarea placeholder="Tell us a bit about yourself and your interest..."></textarea>
+        </div>
+        <div class="franchise-cta-row">
+          <button class="btn-gold" onclick="alert('Thank you! We will contact you within 24 hours.')">🤝 Submit Enquiry</button>
+          <a href="https://wa.me/919876543210?text=Hi%2C+I+want+to+enquire+about+a+Glaze+Dry+Cleaners+franchise." target="_blank" class="fran-tel">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Or chat directly on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <div class="inner">
+    <div class="foot-grid">
+
+      <!-- Logo + contacts + socials -->
+      <div>
+        <a class="foot-logo" href="#home">
+          <div class="foot-gem">💎</div>
+          <div class="foot-brand"><em>Glaze</em> Dry Cleaners</div>
+        </a>
+        <p class="foot-tagline">Lucknow's premier dry cleaning &amp; laundry service. Pristine clothes, trusted care, and a personal touch — since 2008.</p>
+
+        <!-- Social Media -->
+        <div class="social-row">
+          <a class="soc-btn soc-fb" href="https://facebook.com/glazecleaners" target="_blank" rel="noopener" title="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a class="soc-btn soc-ig" href="https://instagram.com/glazecleaners" target="_blank" rel="noopener" title="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a class="soc-btn soc-wa" href="https://wa.me/919876543210" target="_blank" rel="noopener" title="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a class="soc-btn soc-yt" href="https://youtube.com/@glazecleaners" target="_blank" rel="noopener" title="YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a class="soc-btn soc-tw" href="https://twitter.com/glazecleaners" target="_blank" rel="noopener" title="Twitter / X">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a class="soc-btn soc-gm" href="mailto:hello@glazecleaners.in" title="Email us">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+          </a>
+        </div>
+
+        <div class="foot-contacts">
+          <div class="fc-row"><span class="fc-icon">📞</span><span><a href="tel:+919876543210">+91 98765 43210</a> &nbsp;|&nbsp; <a href="tel:+919876543211">+91 98765 43211</a></span></div>
+          <div class="fc-row"><span class="fc-icon">✉️</span><span><a href="mailto:hello@glazecleaners.in">hello@glazecleaners.in</a></span></div>
+          <div class="fc-row"><span class="fc-icon">📍</span><span>Hazratganj &amp; Gomti Nagar, Lucknow, UP</span></div>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="foot-col">
         <h4>Our Services</h4>
-        <ul class="footer-links">
+        <ul class="foot-links">
           <li><a href="#services">Dry Cleaning</a></li>
-          <li><a href="#services">Laundry & Wash</a></li>
+          <li><a href="#services">Laundry &amp; Wash</a></li>
           <li><a href="#services">Steam Ironing</a></li>
           <li><a href="#services">Alterations</a></li>
           <li><a href="#services">Home Textiles</a></li>
-          <li><a href="#services">Pickup & Delivery</a></li>
+          <li><a href="#services">Pickup &amp; Delivery</a></li>
         </ul>
       </div>
 
       <!-- Quick Links -->
-      <div class="footer-col">
+      <div class="foot-col">
         <h4>Quick Links</h4>
-        <ul class="footer-links">
+        <ul class="foot-links">
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About Us</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#faqs">FAQs</a></li>
+          <li><a href="#owner">Our Team</a></li>
           <li><a href="#locations">Shop Locations</a></li>
-          <li><a href="#owner">Meet the Owner</a></li>
+          <li><a href="#franchise">Franchise</a></li>
         </ul>
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <span>© 2024 AquaPress Dry Cleaners & Laundry. All rights reserved.</span>
-      <span>Made with 💧 in Lucknow</span>
+    <div class="foot-bot">
+      <span>© 2024 Glaze Dry Cleaners &amp; Laundry. All rights reserved.</span>
+      <span>Made with 💎 in Lucknow</span>
     </div>
   </div>
 </footer>
 
 <script>
-  function toggleFaq(el) {
-    const allItems = document.querySelectorAll('.faq-item');
-    allItems.forEach(item => {
-      if (item !== el) item.classList.remove('open');
-    });
+  /* ── Hamburger / Mobile Menu ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close when any mobile link is clicked
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', closeMenu);
+  });
+
+  // Close on outside tap
+  mobileMenu.addEventListener('click', e => {
+    if (e.target === mobileMenu) closeMenu();
+  });
+
+  /* ── FAQ toggle ── */
+  function toggleFaq(el){
+    document.querySelectorAll('.faq-item').forEach(i=>{ if(i!==el) i.classList.remove('open'); });
     el.classList.toggle('open');
   }
 
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
+  /* ── Scroll reveal ── */
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('shown'); });
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  document.querySelectorAll('.service-card, .step, .location-card, .about-feat, .faq-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(25px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-  });
-
-  // Smooth active nav
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-      if (window.scrollY >= section.offsetTop - 100) current = section.getAttribute('id');
-    });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? 'white' : '';
-    });
+  /* ── Active nav highlight ── */
+  const secs = document.querySelectorAll('section[id]');
+  const navAs = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll',()=>{
+    let cur='';
+    secs.forEach(s=>{ if(window.scrollY>=s.offsetTop-90) cur=s.id; });
+    navAs.forEach(a=>{ a.style.color = a.getAttribute('href')==='#'+cur ? '#fff' : ''; });
   });
 </script>
 </body>
