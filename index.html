@@ -1,0 +1,2055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaPress Dry Cleaners & Laundry</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  
+  :root {
+    --navy: #0b1d35;
+    --deep: #071426;
+    --blue: #1a6db5;
+    --sky: #3b9de8;
+    --light-blue: #d6ecff;
+    --gold: #c9a84c;
+    --white: #ffffff;
+    --off-white: #f4f9ff;
+    --text-dark: #0d1f3c;
+    --text-mid: #3a5068;
+    --text-light: #7a9ab5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--deep);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ===== BUBBLE BACKGROUND ===== */
+  .bubble-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .bubble {
+    position: absolute;
+    bottom: -120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), rgba(58,157,232,0.08));
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(1px);
+    animation: floatUp linear infinite;
+  }
+
+  .bubble::after {
+    content: '';
+    position: absolute;
+    top: 18%;
+    left: 20%;
+    width: 28%;
+    height: 18%;
+    background: rgba(255,255,255,0.35);
+    border-radius: 50%;
+    transform: rotate(-30deg);
+  }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.4; }
+    100% { transform: translateY(-110vh) translateX(30px) scale(0.85); opacity: 0; }
+  }
+
+  /* Generate many bubbles */
+  .bubble:nth-child(1)  { left: 5%;   width: 40px;  height: 40px;  animation-duration: 14s; animation-delay: 0s;   }
+  .bubble:nth-child(2)  { left: 15%;  width: 70px;  height: 70px;  animation-duration: 18s; animation-delay: 2s;   }
+  .bubble:nth-child(3)  { left: 25%;  width: 30px;  height: 30px;  animation-duration: 12s; animation-delay: 4s;   }
+  .bubble:nth-child(4)  { left: 35%;  width: 55px;  height: 55px;  animation-duration: 16s; animation-delay: 1s;   }
+  .bubble:nth-child(5)  { left: 45%;  width: 80px;  height: 80px;  animation-duration: 20s; animation-delay: 6s;   }
+  .bubble:nth-child(6)  { left: 55%;  width: 45px;  height: 45px;  animation-duration: 13s; animation-delay: 3s;   }
+  .bubble:nth-child(7)  { left: 65%;  width: 60px;  height: 60px;  animation-duration: 17s; animation-delay: 5s;   }
+  .bubble:nth-child(8)  { left: 75%;  width: 35px;  height: 35px;  animation-duration: 11s; animation-delay: 7s;   }
+  .bubble:nth-child(9)  { left: 82%;  width: 90px;  height: 90px;  animation-duration: 22s; animation-delay: 0s;   }
+  .bubble:nth-child(10) { left: 90%;  width: 50px;  height: 50px;  animation-duration: 15s; animation-delay: 4s;   }
+  .bubble:nth-child(11) { left: 10%;  width: 25px;  height: 25px;  animation-duration: 10s; animation-delay: 8s;   }
+  .bubble:nth-child(12) { left: 48%;  width: 65px;  height: 65px;  animation-duration: 19s; animation-delay: 9s;   }
+  .bubble:nth-child(13) { left: 30%;  width: 42px;  height: 42px;  animation-duration: 14s; animation-delay: 11s;  }
+  .bubble:nth-child(14) { left: 70%;  width: 78px;  height: 78px;  animation-duration: 21s; animation-delay: 2s;   }
+  .bubble:nth-child(15) { left: 88%;  width: 32px;  height: 32px;  animation-duration: 12s; animation-delay: 6s;   }
+  .bubble:nth-child(16) { left: 3%;   width: 58px;  height: 58px;  animation-duration: 16s; animation-delay: 13s;  }
+  .bubble:nth-child(17) { left: 58%;  width: 22px;  height: 22px;  animation-duration: 9s;  animation-delay: 1s;   }
+  .bubble:nth-child(18) { left: 42%;  width: 85px;  height: 85px;  animation-duration: 23s; animation-delay: 7s;   }
+  .bubble:nth-child(19) { left: 20%;  width: 48px;  height: 48px;  animation-duration: 15s; animation-delay: 10s;  }
+  .bubble:nth-child(20) { left: 77%;  width: 36px;  height: 36px;  animation-duration: 13s; animation-delay: 15s;  }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4rem;
+    height: 72px;
+    background: rgba(7, 20, 38, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo-icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--sky), var(--blue));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 0 16px rgba(59,157,232,0.4);
+  }
+
+  .nav-logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+
+  .nav-logo-text span { color: var(--sky); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--sky);
+    transition: width 0.3s;
+    border-radius: 2px;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-divider {
+    width: 1px; height: 24px;
+    background: rgba(255,255,255,0.15);
+  }
+
+  .nav-timing {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .timing-dot {
+    width: 7px; height: 7px;
+    background: #4caf50;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(76,175,80,0.4); }
+    50% { box-shadow: 0 0 0 5px rgba(76,175,80,0); }
+  }
+
+  /* ===== SECTIONS BASE ===== */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 30px; height: 2px;
+    background: var(--sky);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--white);
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--sky);
+  }
+
+  /* ===== HERO SECTION ===== */
+  #home {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #071426 0%, #0b2040 40%, #0a1830 100%);
+    display: flex;
+    align-items: center;
+    padding-top: 72px;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(59,157,232,0.12);
+    border: 1px solid rgba(59,157,232,0.3);
+    color: var(--sky);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title .accent { color: var(--sky); }
+  .hero-title .gold { color: var(--gold); }
+
+  .hero-subtitle {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    max-width: 480px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--sky), var(--blue));
+    color: var(--white);
+    border: none;
+    padding: 14px 34px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 30px rgba(59,157,232,0.35);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(59,157,232,0.5);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    padding: 14px 34px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--sky);
+    background: rgba(59,157,232,0.08);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--sky);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-circle-bg {
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,157,232,0.12) 0%, transparent 70%);
+    position: absolute;
+  }
+
+  .hero-card-main {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
+    padding: 2.5rem;
+    backdrop-filter: blur(20px);
+    width: 320px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-card-desc {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .hero-tag {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(59,157,232,0.15);
+    border: 1px solid rgba(59,157,232,0.25);
+    color: var(--sky);
+    font-weight: 500;
+  }
+
+  .hero-float-card {
+    position: absolute;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    backdrop-filter: blur(16px);
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.8);
+    z-index: 3;
+  }
+
+  .hero-float-card.top-right {
+    top: -30px; right: -30px;
+    text-align: center;
+  }
+
+  .hero-float-card.bottom-left {
+    bottom: -20px; left: -30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .float-icon { font-size: 1.5rem; }
+
+  /* ===== ABOUT SECTION ===== */
+  #about {
+    padding: 7rem 0;
+    background: linear-gradient(180deg, #071426 0%, #0c2040 100%);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-image-stack {
+    position: relative;
+    height: 480px;
+  }
+
+  .about-card-big {
+    position: absolute;
+    top: 0; left: 0;
+    width: 70%;
+    height: 75%;
+    background: linear-gradient(135deg, rgba(59,157,232,0.15), rgba(26,109,181,0.1));
+    border: 1px solid rgba(59,157,232,0.2);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+  }
+
+  .about-card-small {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 55%;
+    height: 50%;
+    background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.05));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 24px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .about-badge-float {
+    position: absolute;
+    top: 50%; left: 55%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, var(--sky), var(--blue));
+    border-radius: 50%;
+    width: 100px; height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(59,157,232,0.45);
+    z-index: 5;
+    text-align: center;
+  }
+
+  .about-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+  }
+
+  .about-badge-text {
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.5px;
+  }
+
+  .about-content p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .about-feat {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 1rem;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .about-feat-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .about-feat-text {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.5;
+  }
+
+  .about-feat-text strong {
+    display: block;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 2px;
+    font-size: 0.92rem;
+  }
+
+  /* ===== SERVICES ===== */
+  #services {
+    padding: 7rem 0;
+    background: var(--deep);
+  }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .services-header .section-label {
+    justify-content: center;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sky), var(--blue));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(59,157,232,0.25);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+
+  .service-card:hover::before { opacity: 1; }
+
+  .service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.25rem;
+    display: block;
+  }
+
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .service-desc {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .service-list li {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.5);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .service-list li::before {
+    content: '✦';
+    color: var(--sky);
+    font-size: 0.6rem;
+  }
+
+  /* ===== HOW WE WORK ===== */
+  #how-it-works {
+    padding: 7rem 0;
+    background: linear-gradient(180deg, #0c2040 0%, #071426 100%);
+  }
+
+  .how-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .how-header .section-label { justify-content: center; }
+
+  .steps-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  /* .steps-container::before {
+    content: '';
+    position: absolute;
+    top: 52px;
+    left: calc(12.5% + 25px);
+    right: calc(12.5% + 25px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--sky), rgba(59,157,232,0.3));
+    z-index: 0;
+  } */
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-num-wrap {
+    width: 104px; height: 104px;
+    border-radius: 50%;
+    background: rgba(59,157,232,0.1);
+    border: 2px solid rgba(59,157,232,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    position: relative;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .step:hover .step-num-wrap {
+    background: rgba(59,157,232,0.2);
+    border-color: var(--sky);
+    box-shadow: 0 0 30px rgba(59,157,232,0.3);
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--sky);
+  }
+
+  .step-icon-float {
+    position: absolute;
+    top: -5px; right: -5px;
+    width: 32px; height: 32px;
+    background: var(--sky);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .step-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+  }
+
+  /* ===== PRICING ===== */
+  #pricing {
+    padding: 7rem 0;
+    background: var(--deep);
+  }
+
+  .pricing-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .pricing-header .section-label { justify-content: center; }
+
+  .pricing-table-wrap {
+    overflow-x: auto;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  table.pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.03);
+    font-size: 0.9rem;
+  }
+
+  .pricing-table thead tr {
+    background: linear-gradient(135deg, rgba(59,157,232,0.2), rgba(26,109,181,0.15));
+  }
+
+  .pricing-table th {
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--sky);
+    border-bottom: 1px solid rgba(59,157,232,0.2);
+  }
+
+  .pricing-table th:first-child { border-radius: 0; }
+
+  .pricing-table tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.2s;
+  }
+
+  .pricing-table tbody tr:hover {
+    background: rgba(59,157,232,0.06);
+  }
+
+  .pricing-table td {
+    padding: 1.1rem 1.5rem;
+    color: rgba(255,255,255,0.75);
+    vertical-align: middle;
+  }
+
+  .pricing-table td:first-child {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .price-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .price-note {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.35);
+    margin-top: 2px;
+  }
+
+  .tag-express {
+    font-size: 0.7rem;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .tag-popular {
+    font-size: 0.7rem;
+    background: rgba(59,157,232,0.15);
+    border: 1px solid rgba(59,157,232,0.3);
+    color: var(--sky);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .pricing-note {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ===== FAQs ===== */
+  #faqs {
+    padding: 7rem 0;
+    background: linear-gradient(180deg, #071426 0%, #0c2040 100%);
+  }
+
+  .faq-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .faq-sidebar p {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    margin-top: 1.5rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .faq-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .faq-item.open {
+    border-color: rgba(59,157,232,0.3);
+  }
+
+  .faq-q {
+    padding: 1.25rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+
+  .faq-toggle {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: rgba(59,157,232,0.15);
+    border: 1px solid rgba(59,157,232,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    color: var(--sky);
+    flex-shrink: 0;
+    transition: background 0.3s, transform 0.3s;
+  }
+
+  .faq-item.open .faq-toggle {
+    background: var(--sky);
+    color: white;
+    transform: rotate(45deg);
+  }
+
+  .faq-a {
+    display: none;
+    padding: 0 1.5rem 1.25rem;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .faq-item.open .faq-a { display: block; }
+
+  /* ===== OWNER SECTION ===== */
+  #owner {
+    padding: 7rem 0;
+    background: var(--deep);
+  }
+
+  .owner-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .owner-visual {
+    position: relative;
+  }
+
+  .owner-photo-frame {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: linear-gradient(145deg, rgba(59,157,232,0.15), rgba(26,109,181,0.08));
+    border: 1px solid rgba(59,157,232,0.2);
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .owner-photo-frame::before {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,157,232,0.15), transparent);
+  }
+
+  .owner-detail-card {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    background: linear-gradient(135deg, var(--gold), #a07830);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    min-width: 160px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  }
+
+  .owner-detail-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+  }
+
+  .owner-detail-label {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+
+  .owner-content .section-label { justify-content: flex-start; }
+
+  .owner-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .owner-role {
+    font-size: 0.88rem;
+    color: var(--sky);
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .owner-bio {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  .owner-certs {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .cert-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ===== LOCATIONS ===== */
+  #locations {
+    padding: 7rem 0;
+    background: linear-gradient(180deg, #0c2040 0%, #071426 100%);
+  }
+
+  .locations-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .locations-header .section-label { justify-content: center; }
+
+  .locations-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .location-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .location-card:hover { border-color: rgba(59,157,232,0.25); }
+
+  .map-frame {
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(135deg, #0d2040, #1a3a60);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(30%) invert(5%);
+  }
+
+  .map-overlay-label {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: rgba(7, 20, 38, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(59,157,232,0.3);
+    color: var(--sky);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  .location-info {
+    padding: 1.75rem 2rem;
+  }
+
+  .location-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .location-badge {
+    font-size: 0.68rem;
+    font-family: 'DM Sans', sans-serif;
+    background: rgba(59,157,232,0.15);
+    border: 1px solid rgba(59,157,232,0.25);
+    color: var(--sky);
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .location-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .loc-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.87rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .loc-icon {
+    color: var(--sky);
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 4rem 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 2rem;
+  }
+
+  .footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+    text-decoration: none;
+  }
+
+  .footer-logo-icon {
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, var(--sky), var(--blue));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 0 20px rgba(59,157,232,0.35);
+  }
+
+  .footer-logo-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .footer-logo-name span { color: var(--sky); }
+
+  .footer-tagline {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    max-width: 280px;
+  }
+
+  .footer-contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.87rem;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .fc-icon {
+    color: var(--sky);
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1.25rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+  }
+
+  .footer-col h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 30px; height: 2px;
+    background: var(--sky);
+    border-radius: 2px;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .footer-links a::before {
+    content: '→';
+    font-size: 0.75rem;
+    color: var(--sky);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--white); }
+  .footer-links a:hover::before { opacity: 1; }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.25);
+  }
+
+  /* ===== TIMING BAR ===== */
+  .timing-bar {
+    background: linear-gradient(135deg, rgba(59,157,232,0.12), rgba(26,109,181,0.08));
+    border: 1px solid rgba(59,157,232,0.2);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 5rem;
+  }
+
+  .timing-head {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .timing-slots {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .timing-slot {
+    text-align: center;
+  }
+
+  .slot-day {
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 3px;
+  }
+
+  .slot-time {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .slot-time.closed { color: rgba(255,80,80,0.8); }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .anim {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .anim-1 { animation-delay: 0.1s; }
+  .anim-2 { animation-delay: 0.25s; }
+  .anim-3 { animation-delay: 0.4s; }
+  .anim-4 { animation-delay: 0.55s; }
+  .anim-5 { animation-delay: 0.7s; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-visual { display: none; }
+    .about-grid, .owner-grid, .faq-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .steps-container { grid-template-columns: 1fr 1fr; }
+    .steps-container::before { display: none; }
+    .locations-grid { grid-template-columns: 1fr; }
+    .footer-main { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .steps-container { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+  }
+
+</style>
+
+</head>
+<body>
+
+<!-- ===== BUBBLES ===== -->
+<div class="bubble-container" aria-hidden="true">
+  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav>
+  <a class="nav-logo" href="#home">
+    <div class="nav-logo-icon">💧</div>
+    <div class="nav-logo-text">Aqua<span>Press</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faqs">FAQs</a></li>
+    <div class="nav-divider"></div>
+    <li>
+      <div class="nav-timing">
+        <div class="timing-dot"></div>
+        Open · 8AM – 9PM
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="home">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge anim anim-1">✦ Trusted Since 2008</div>
+      <h1 class="hero-title anim anim-2">
+        Your Clothes.<br>
+        <span class="accent">Perfectly</span><br>
+        <span class="gold">Pristine.</span>
+      </h1>
+      <p class="hero-subtitle anim anim-3">
+        Premium dry cleaning, laundry & garment care services delivered with precision, care, and a personal touch. Because your clothes deserve the best.
+      </p>
+      <div class="hero-cta anim anim-4">
+        <a href="#services" class="btn-primary">Our Services ↓</a>
+        <a href="#locations" class="btn-outline">Find a Shop</a>
+      </div>
+      <div class="hero-stats anim anim-5">
+        <div>
+          <div class="stat-num">15+</div>
+          <div class="stat-label">Years of Excellence</div>
+        </div>
+        <div>
+          <div class="stat-num">12K+</div>
+          <div class="stat-label">Happy Customers</div>
+        </div>
+        <div>
+          <div class="stat-num">99%</div>
+          <div class="stat-label">Satisfaction Rate</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-circle-bg"></div>
+      <div class="hero-card-main">
+        <div class="hero-card-icon">🧺</div>
+        <div class="hero-card-title">Premium Care</div>
+        <div class="hero-card-desc">Every garment handled with expert attention — from silks to suits, we do it right.</div>
+        <div class="hero-tags">
+          <span class="hero-tag">Dry Clean</span>
+          <span class="hero-tag">Laundry</span>
+          <span class="hero-tag">Ironing</span>
+          <span class="hero-tag">Alterations</span>
+        </div>
+      </div>
+      <div class="hero-float-card top-right">
+        <div style="font-size:1.4rem">⭐⭐⭐⭐⭐</div>
+        <div style="font-size:0.75rem; margin-top:4px; color:rgba(255,255,255,0.55)">4.9 / 5 Rating</div>
+      </div>
+      <div class="hero-float-card bottom-left">
+        <div class="float-icon">⚡</div>
+        <div>
+          <div style="font-weight:600">Express Ready</div>
+          <div style="font-size:0.75rem; color:rgba(255,255,255,0.5)">Same-day service</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-image-stack">
+        <div class="about-card-big">🧼</div>
+        <div class="about-card-small">
+          <div style="font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:6px;">Est. 2008</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:700; color:var(--white); line-height:1.3;">Lucknow's Most Trusted Laundry</div>
+        </div>
+        <div class="about-badge-float">
+          <div class="about-badge-num">15</div>
+          <div class="about-badge-text">Years of<br>Service</div>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">Care That Goes <em>Beyond Clean</em></h2>
+        <p style="margin-top:1.5rem;">AquaPress has been Lucknow's go-to destination for premium garment care since 2008. We combine modern technology with skilled craftsmanship to deliver results that truly stand out.</p>
+        <p>From everyday laundry to your most delicate designer pieces, every item is treated with the highest care, using eco-friendly solvents and professional-grade equipment.</p>
+        <div class="about-features">
+          <div class="about-feat">
+            <div class="about-feat-icon">🌿</div>
+            <div class="about-feat-text"><strong>Eco-Friendly</strong>Green solvents, minimal waste</div>
+          </div>
+          <div class="about-feat">
+            <div class="about-feat-icon">⚡</div>
+            <div class="about-feat-text"><strong>Express Service</strong>Ready in 24 hours</div>
+          </div>
+          <div class="about-feat">
+            <div class="about-feat-icon">🛡️</div>
+            <div class="about-feat-text"><strong>Fully Insured</strong>Your clothes are protected</div>
+          </div>
+          <div class="about-feat">
+            <div class="about-feat-icon">🚗</div>
+            <div class="about-feat-text"><strong>Free Pickup</strong>We come to you</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timing Bar -->
+    <div class="timing-bar">
+      <div class="timing-head">🕐 Shop Hours</div>
+      <div class="timing-slots">
+        <div class="timing-slot">
+          <div class="slot-day">Mon – Fri</div>
+          <div class="slot-time">8:00 AM – 9:00 PM</div>
+        </div>
+        <div class="timing-slot">
+          <div class="slot-day">Saturday</div>
+          <div class="slot-time">9:00 AM – 8:00 PM</div>
+        </div>
+        <div class="timing-slot">
+          <div class="slot-day">Sunday</div>
+          <div class="slot-time">10:00 AM – 6:00 PM</div>
+        </div>
+        <div class="timing-slot">
+          <div class="slot-day">Holidays</div>
+          <div class="slot-time closed">Closed</div>
+        </div>
+      </div>
+      <a href="tel:+91XXXXXXXXXX" class="btn-primary" style="white-space:nowrap">📞 Call Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="section-inner">
+    <div class="services-header">
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title">Our <em>Services</em></h2>
+      <p style="margin-top:1rem; font-size:1rem; color:rgba(255,255,255,0.5); max-width:520px; margin-left:auto; margin-right:auto;">Expert garment care for every fabric, every occasion, every need.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">👔</span>
+        <div class="service-name">Dry Cleaning</div>
+        <p class="service-desc">Solvent-based cleaning for delicate and special fabrics that can't tolerate water. Professional, gentle, and thorough.</p>
+        <ul class="service-list">
+          <li>Suits & Blazers</li>
+          <li>Sarees & Lehengas</li>
+          <li>Wedding Garments</li>
+          <li>Curtains & Drapes</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🧺</span>
+        <div class="service-name">Laundry & Wash</div>
+        <p class="service-desc">Complete laundry service — wash, dry, fold and pack. Fresh, clean clothes delivered back to you.</p>
+        <ul class="service-list">
+          <li>Daily Wear</li>
+          <li>Bedsheets & Linen</li>
+          <li>Bulk Laundry</li>
+          <li>Delicate Fabrics</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">♨️</span>
+        <div class="service-name">Steam Ironing</div>
+        <p class="service-desc">Professional steam ironing for crisp, wrinkle-free results. Perfect for daily wear and formal occasions alike.</p>
+        <ul class="service-list">
+          <li>Shirts & Trousers</li>
+          <li>Kurtas & Ethnic Wear</li>
+          <li>Business Formals</li>
+          <li>School Uniforms</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">✂️</span>
+        <div class="service-name">Alterations</div>
+        <p class="service-desc">Expert tailoring and alterations to ensure your garments fit perfectly every time.</p>
+        <ul class="service-list">
+          <li>Hemming & Fitting</li>
+          <li>Zipper Replacement</li>
+          <li>Button Repairs</li>
+          <li>Resizing</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🛋️</span>
+        <div class="service-name">Home Textiles</div>
+        <p class="service-desc">Deep cleaning for bulky home textiles — fresh, sanitized, and returned smelling wonderful.</p>
+        <ul class="service-list">
+          <li>Sofa Covers</li>
+          <li>Quilts & Blankets</li>
+          <li>Carpets & Rugs</li>
+          <li>Pillows & Cushions</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🚗</span>
+        <div class="service-name">Pickup & Delivery</div>
+        <p class="service-desc">Doorstep convenience — we collect your clothes, care for them, and deliver back to you fresh.</p>
+        <ul class="service-list">
+          <li>Free Home Pickup</li>
+          <li>Scheduled Delivery</li>
+          <li>Same-Day Express</li>
+          <li>Subscription Plans</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW WE WORK ===== -->
+<section id="how-it-works">
+  <div class="section-inner">
+    <div class="how-header">
+      <div class="section-label">Our Process</div>
+      <h2 class="section-title">How It <em>Works</em></h2>
+      <p style="margin-top:1rem; font-size:1rem; color:rgba(255,255,255,0.5); max-width:500px; margin-left:auto; margin-right:auto;">Four simple steps from dirty to dazzling — easy, efficient, and entirely hassle-free.</p>
+    </div>
+    <div class="steps-container">
+      <div class="step">
+        <div class="step-num-wrap">
+          <div class="step-num">01</div>
+          <div class="step-icon-float">📞</div>
+        </div>
+        <h3 class="step-title">Book a Pickup</h3>
+        <p class="step-desc">Call us, WhatsApp, or book online. We'll schedule a pickup at your convenience — at home or office.</p>
+      </div>
+      <div class="step">
+        <div class="step-num-wrap">
+          <div class="step-num">02</div>
+          <div class="step-icon-float">🔍</div>
+        </div>
+        <h3 class="step-title">Inspect & Tag</h3>
+        <p class="step-desc">Each garment is carefully inspected, tagged, and assessed for the right cleaning method.</p>
+      </div>
+      <div class="step">
+        <div class="step-num-wrap">
+          <div class="step-num">03</div>
+          <div class="step-icon-float">✨</div>
+        </div>
+        <h3 class="step-title">Expert Cleaning</h3>
+        <p class="step-desc">Your clothes go through our professional cleaning process — tailored to each fabric type.</p>
+      </div>
+      <div class="step">
+        <div class="step-num-wrap">
+          <div class="step-num">04</div>
+          <div class="step-icon-float">🚀</div>
+        </div>
+        <h3 class="step-title">Delivered Fresh</h3>
+        <p class="step-desc">Neatly packed and delivered back to your door — fresh, crisp, and ready to wear.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="pricing-header">
+      <div class="section-label">Transparent Rates</div>
+      <h2 class="section-title">Simple <em>Pricing</em></h2>
+      <p style="margin-top:1rem; font-size:1rem; color:rgba(255,255,255,0.5);">No hidden charges. What you see is what you pay.</p>
+    </div>
+    <div class="pricing-table-wrap">
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Garment / Item</th>
+            <th>Dry Clean</th>
+            <th>Wash & Fold</th>
+            <th>Iron Only</th>
+            <th>Express (+50%)</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Shirt / T-Shirt</td>
+            <td><div class="price-tag">₹80</div></td>
+            <td><div class="price-tag">₹40</div></td>
+            <td><div class="price-tag">₹20</div></td>
+            <td><span class="tag-express">Available</span></td>
+            <td><span style="color:rgba(255,255,255,0.4); font-size:0.8rem">Per piece</span></td>
+          </tr>
+          <tr>
+            <td>Trousers / Jeans</td>
+            <td><div class="price-tag">₹100</div></td>
+            <td><div class="price-tag">₹50</div></td>
+            <td><div class="price-tag">₹25</div></td>
+            <td><span class="tag-express">Available</span></td>
+            <td><span style="color:rgba(255,255,255,0.4); font-size:0.8rem">Per piece</span></td>
+          </tr>
+          <tr>
+            <td>Suit (2-piece)</td>
+            <td><div class="price-tag">₹350</div></td>
+            <td><div class="price-tag">₹180</div></td>
+            <td><div class="price-tag">₹80</div></td>
+            <td><span class="tag-express">Available</span></td>
+            <td><span class="tag-popular">Popular</span></td>
+          </tr>
+          <tr>
+            <td>Saree (Silk)</td>
+            <td><div class="price-tag">₹200</div></td>
+            <td><div class="price-tag">₹100</div></td>
+            <td><div class="price-tag">₹50</div></td>
+            <td><span class="tag-express">Available</span></td>
+            <td><span style="color:rgba(255,255,255,0.4); font-size:0.8rem">Gentle care</span></td>
+          </tr>
+          <tr>
+            <td>Lehenga / Sherwani</td>
+            <td><div class="price-tag">₹500</div><div class="price-note">From ₹500</div></td>
+            <td><div class="price-tag">₹250</div></td>
+            <td><div class="price-tag">₹120</div></td>
+            <td><span class="tag-express">Available</span></td>
+            <td><span class="tag-popular">Popular</span></td>
+          </tr>
+          <tr>
+            <td>Blanket / Quilt</td>
+            <td><div class="price-tag">₹300</div></td>
+            <td><div class="price-tag">₹150</div></td>
+            <td><div class="price-tag">₹60</div></td>
+            <td>—</td>
+            <td><span style="color:rgba(255,255,255,0.4); font-size:0.8rem">Size may vary</span></td>
+          </tr>
+          <tr>
+            <td>Curtains (per pair)</td>
+            <td><div class="price-tag">₹400</div></td>
+            <td><div class="price-tag">₹200</div></td>
+            <td><div class="price-tag">₹80</div></td>
+            <td>—</td>
+            <td><span style="color:rgba(255,255,255,0.4); font-size:0.8rem">Per pair</span></td>
+          </tr>
+          <tr>
+            <td>Bedsheet (Double)</td>
+            <td><div class="price-tag">₹150</div></td>
+            <td><div class="price-tag">₹80</div></td>
+            <td><div class="price-tag">₹40</div></td>
+            <td><span class="tag-express">Available</span></td>
+            <td><span style="color:rgba(255,255,255,0.4); font-size:0.8rem">Per piece</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="pricing-note">💡 Prices are indicative. Final cost confirmed at inspection. GST applicable as per norms. Bulk & subscription discounts available.</p>
+  </div>
+</section>
+
+<!-- ===== FAQs ===== -->
+<section id="faqs">
+  <div class="section-inner">
+    <div class="faq-layout">
+      <div class="faq-sidebar">
+        <div class="section-label">Common Questions</div>
+        <h2 class="section-title">Got <em>Questions?</em></h2>
+        <p>We've answered the most common queries below. Still have doubts? Feel free to call us or walk into either of our shops — we're always happy to help.</p>
+        <a href="tel:+91XXXXXXXXXX" class="btn-primary" style="margin-top:2rem; display:inline-flex">📞 Talk to Us</a>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item open" onclick="toggleFaq(this)">
+          <div class="faq-q">How long does dry cleaning take? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Standard dry cleaning takes 48–72 hours depending on the garment type. For express service, most items are ready within 24 hours for an additional charge of 50%.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Do you offer home pickup and delivery? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Yes! We offer free home pickup and delivery within a 5 km radius of our shops. For areas beyond that, a small delivery charge applies. You can schedule via call or WhatsApp.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Are my clothes insured while in your care? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Absolutely. All garments left with us are fully insured against damage or loss during the cleaning process. We take full responsibility from the moment we receive your clothes.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">What if my garment is damaged during cleaning? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">In the rare event of damage caused by our process, we will compensate you based on the garment's current value. Our team is trained to prevent such situations, and we handle every item with utmost care.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Do you use eco-friendly solvents? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Yes, we use environment-friendly, non-toxic cleaning agents that are safe for fabrics, people, and the planet. We are committed to sustainable practices in all our operations.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Can I drop off clothes anytime during shop hours? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Yes, walk-ins are always welcome! Both our shops are open Monday–Friday 8AM–9PM, Saturday 9AM–8PM, and Sunday 10AM–6PM. No appointment needed for drop-offs.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Do you offer subscription or monthly plans? <span class="faq-toggle">+</span></div>
+          <div class="faq-a">Yes! We have monthly subscription plans for regular customers — great for families and professionals. Plans start at ₹999/month and include weekly pickups, priority processing, and a 20% discount on all services.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OWNER ===== -->
+<section id="owner">
+  <div class="section-inner">
+    <div class="owner-grid">
+      <div class="owner-visual">
+        <div class="owner-photo-frame">🧑‍💼</div>
+        <div class="owner-detail-card">
+          <div class="owner-detail-num">15+</div>
+          <div class="owner-detail-label">Years Experience</div>
+        </div>
+      </div>
+      <div class="owner-content">
+        <div class="section-label">Meet the Owner</div>
+        <div class="owner-name">Rajesh Kumar<br>Sharma</div>
+        <div class="owner-role">Founder & Master Cleaner · AquaPress</div>
+        <p class="owner-bio">
+          With over 15 years in the garment care industry, Rajesh started AquaPress with a simple vision — to provide the residents of Lucknow with a laundry service they could genuinely trust. What began as a small shop in Hazratganj has grown into one of the city's most beloved dry cleaning establishments.
+        </p>
+        <p class="owner-bio">
+          Trained in advanced garment care techniques in Delhi and certified by the Textile Care Allied Trades Association (TCATA), Rajesh personally oversees quality control at both shop locations. He believes that clean clothes aren't just about appearance — they're about confidence and dignity.
+        </p>
+        <div class="owner-certs">
+          <div class="cert-badge">🏆 TCATA Certified</div>
+          <div class="cert-badge">🌿 Eco-Clean Approved</div>
+          <div class="cert-badge">⭐ ISO 9001 Quality</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOCATIONS ===== -->
+<section id="locations">
+  <div class="section-inner">
+    <div class="locations-header">
+      <div class="section-label">Find Us</div>
+      <h2 class="section-title">Our <em>Shop Locations</em></h2>
+      <p style="margin-top:1rem; font-size:1rem; color:rgba(255,255,255,0.5);">Visit us at either of our two convenient locations in Lucknow.</p>
+    </div>
+    <div class="locations-grid">
+      <!-- Shop 1 -->
+      <div class="location-card">
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.5!2d80.946!3d26.847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zSGF6cmF0Z2Fuaiwg!5e0!3m2!1sen!2sin!4v1"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <div class="map-overlay-label">Shop 1 · Hazratganj</div>
+        </div>
+        <div class="location-info">
+          <div class="location-name">
+            AquaPress — Hazratganj
+            <span class="location-badge">Main Branch</span>
+          </div>
+          <div class="location-details">
+            <div class="loc-detail">
+              <span class="loc-icon">📍</span>
+              <span>12, Rana Pratap Marg, Hazratganj, Lucknow, UP – 226001</span>
+            </div>
+            <div class="loc-detail">
+              <span class="loc-icon">📞</span>
+              <span>+91 98765 43210</span>
+            </div>
+            <div class="loc-detail">
+              <span class="loc-icon">✉️</span>
+              <span>hazratganj@aquapress.in</span>
+            </div>
+            <div class="loc-detail">
+              <span class="loc-icon">🕐</span>
+              <span>Mon–Fri: 8AM–9PM &nbsp;|&nbsp; Sat: 9AM–8PM &nbsp;|&nbsp; Sun: 10AM–6PM</span>
+            </div>
+            <div class="loc-detail">
+              <span class="loc-icon">🚗</span>
+              <span>Parking available. Near Hazratganj Metro Exit 2.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shop 2 -->
+      <div class="location-card">
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.2!2d80.995!3d26.842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zR29tdGkgTmFnYXI!5e0!3m2!1sen!2sin!4v1"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <div class="map-overlay-label">Shop 2 · Gomti Nagar</div>
+        </div>
+        <div class="location-info">
+          <div class="location-name">
+            AquaPress — Gomti Nagar
+            <span class="location-badge">Branch</span>
+          </div>
+          <div class="location-details">
+            <div class="loc-detail">
+              <span class="loc-icon">📍</span>
+              <span>B-45, Viraj Khand, Gomti Nagar, Lucknow, UP – 226010</span>
+            </div>
+            <div class="loc-detail">
+              <span class="loc-icon">📞</span>
+              <span>+91 98765 43211</span>
+            </div>
+            <div class="loc-detail">
+              <span class="loc-icon">✉️</span>
+              <span>gomtinagar@aquapress.in</span>
+            </div>
+            <div class="loc-detail">
+              <span class="loc-icon">🕐</span>
+              <span>Mon–Fri: 8AM–9PM &nbsp;|&nbsp; Sat: 9AM–8PM &nbsp;|&nbsp; Sun: 10AM–6PM</span>
+            </div>
+            <div class="loc-detail">
+              <span class="loc-icon">🚗</span>
+              <span>Ample street parking. 5 min from Viraj Khand Market.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FRANCHISE ===== -->
+<section id="franchise">
+  <div class="section-inner">
+    <div style="text-align:center; max-width:700px; margin:auto;">
+      <div class="section-label" style="justify-content:center;">Grow With Us</div>
+      <h2 class="section-title">Start Your <em>Franchise</em></h2>
+      <p style="margin-top:1rem; color:rgba(255,255,255,0.6);">
+        Join AquaPress and build your own successful laundry business with our trusted brand,
+        proven system, and full support.
+      </p>
+
+      <div style="margin-top:2rem; background:rgba(255,255,255,0.05); padding:2rem; border-radius:20px; border:1px solid rgba(255,255,255,0.08);">
+        <h3 style="margin-bottom:1rem;">📞 Contact for Franchise</h3>
+        <p style="margin-bottom:1rem;">Call or WhatsApp us to get started:</p>
+
+        <a href="tel:+919999999999" class="btn-primary">Call Now</a>
+
+        <a href="https://wa.me/919999999999" target="_blank" class="btn-outline" style="margin-left:10px;">
+          💬 WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</br>
+
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="section-inner">
+    <div class="footer-main">
+      <!-- Logo + Contacts -->
+      <div>
+        <a class="footer-logo-wrap" href="#home">
+          <div class="footer-logo-icon">💧</div>
+          <div class="footer-logo-name">Aqua<span>Press</span></div>
+        </a>
+        <p class="footer-tagline">
+          Lucknow's premier dry cleaning and laundry service. Pristine clothes, trusted care, and a smile — since 2008.
+        </p>
+        <div class="footer-contact-list">
+          <div class="footer-contact-item">
+            <span class="fc-icon">📞</span>
+            <span>+91 98765 43210 &nbsp;|&nbsp; +91 98765 43211</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="fc-icon">✉️</span>
+            <span>hello@aquapress.in</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="fc-icon">📍</span>
+            <span>12 Rana Pratap Marg, Hazratganj, Lucknow &<br>B-45 Viraj Khand, Gomti Nagar, Lucknow</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Services Links -->
+      <div class="footer-col">
+        <h4>Our Services</h4>
+        <ul class="footer-links">
+          <li><a href="#services">Dry Cleaning</a></li>
+          <li><a href="#services">Laundry & Wash</a></li>
+          <li><a href="#services">Steam Ironing</a></li>
+          <li><a href="#services">Alterations</a></li>
+          <li><a href="#services">Home Textiles</a></li>
+          <li><a href="#services">Pickup & Delivery</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+          <li><a href="#locations">Shop Locations</a></li>
+          <li><a href="#owner">Meet the Owner</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2024 AquaPress Dry Cleaners & Laundry. All rights reserved.</span>
+      <span>Made with 💧 in Lucknow</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const allItems = document.querySelectorAll('.faq-item');
+    allItems.forEach(item => {
+      if (item !== el) item.classList.remove('open');
+    });
+    el.classList.toggle('open');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .step, .location-card, .about-feat, .faq-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(25px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+  // Smooth active nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 100) current = section.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'white' : '';
+    });
+  });
+</script>
+</body>
+</html>
